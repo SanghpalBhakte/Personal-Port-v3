@@ -5,7 +5,10 @@ export const VisualWork: React.FC = () => {
   return (
     <section id="gfx" className="gfx section-rule" aria-labelledby="gfx-title">
       <div className="section-heading">
-        <p className="eyebrow">03 / Visual work</p>
+        <div className="section-meta">
+          <p className="eyebrow">03 / Visual work</p>
+          <span className="section-subtext">Selected graphic experiments</span>
+        </div>
         <h2 id="gfx-title">
           Design work,<br />
           kept in the mix.
@@ -19,7 +22,6 @@ export const VisualWork: React.FC = () => {
             href={work.url}
             target="_blank"
             rel="noreferrer"
-            style={{ textDecoration: "none" }}
           >
             <p className="eyebrow">{work.eyebrow}</p>
             <h3>
@@ -31,7 +33,9 @@ export const VisualWork: React.FC = () => {
               ))}
             </h3>
             <p>{work.description}</p>
-            <span>{work.ctaText}</span>
+            <span className="gfx-cta">
+              {work.ctaText}
+            </span>
           </a>
         ))}
       </div>

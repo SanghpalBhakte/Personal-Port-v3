@@ -77,7 +77,11 @@ export const ContactSection: React.FC = () => {
 
   return (
     <footer id="contact">
-      <p className="eyebrow">07 / Contact</p>
+      <div className="footer-top">
+        <p className="eyebrow">07 / Contact</p>
+        <span className="footer-subtext">Direct lines & public presence</span>
+      </div>
+
       <h2>
         Elsewhere on<br />
         the <a href={`mailto:${siteConfig.contactEmail}`}>internet.</a>
@@ -91,7 +95,8 @@ export const ContactSection: React.FC = () => {
             target={social.name !== "Email" ? "_blank" : undefined}
             rel={social.name !== "Email" ? "noreferrer" : undefined}
           >
-            {social.name} ↗
+            <span>{social.name}</span>
+            <span className="link-arrow" aria-hidden="true">↗</span>
           </a>
         ))}
       </div>
@@ -196,7 +201,7 @@ export const ContactSection: React.FC = () => {
 
       <p className="copyright">
         © 2026 {siteConfig.name}{" "}
-        <span>Made with patience in {siteConfig.originCity}.</span>
+        <span>Made with patience in {siteConfig.locationCity}.</span>
       </p>
     </footer>
   );

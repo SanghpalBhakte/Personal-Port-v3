@@ -4,9 +4,10 @@ import { toolGroups } from "@/lib/data";
 export const Toolbox: React.FC = () => {
   return (
     <section className="toolbox section-rule" aria-labelledby="toolbox-title">
-      <div>
+      <div className="section-meta">
         <p className="eyebrow">04 / Tools</p>
         <h2 id="toolbox-title">What I use.</h2>
+        <span className="section-subtext">Technologies, platforms & thinking tools</span>
       </div>
       <div className="tool-groups">
         {toolGroups.map((group) => (

@@ -5,7 +5,10 @@ export const SelectedWork: React.FC = () => {
   return (
     <section id="work" className="work section-rule" aria-labelledby="work-title">
       <div className="section-heading">
-        <p className="eyebrow">01 / Selected work</p>
+        <div className="section-meta">
+          <p className="eyebrow">01 / Selected work</p>
+          <span className="section-subtext">Projects & systems in progress</span>
+        </div>
         <h2 id="work-title">
           A few things<br />
           I’m working on.

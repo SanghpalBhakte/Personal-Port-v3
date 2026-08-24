@@ -5,7 +5,10 @@ export const NowAndArchive: React.FC = () => {
   return (
     <>
       <section className="now section-rule" aria-labelledby="now-title">
-        <p className="eyebrow">05 / Now</p>
+        <div className="section-meta">
+          <p className="eyebrow">05 / Now</p>
+          <span className="section-subtext">Current focus & learning</span>
+        </div>
         <div>
           <h2 id="now-title">
             Currently building<br />
@@ -16,7 +19,10 @@ export const NowAndArchive: React.FC = () => {
       </section>
 
       <section className="archive section-rule" aria-labelledby="archive-title">
-        <p className="eyebrow">06 / Earlier experiments</p>
+        <div className="section-meta">
+          <p className="eyebrow">06 / Earlier experiments</p>
+          <span className="section-subtext">Historical portfolio iterations</span>
+        </div>
         <div>
           <h2 id="archive-title">
             The archive is part<br />
@@ -33,7 +39,8 @@ export const NowAndArchive: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                {archive.title} <span>↗</span>
+                <span>{archive.title}</span>
+                <span className="archive-arrow" aria-hidden="true">↗</span>
               </a>
             ))}
           </div>

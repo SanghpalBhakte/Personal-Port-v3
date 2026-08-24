@@ -5,7 +5,10 @@ export const HowIWork: React.FC = () => {
   return (
     <section id="notes" className="notes section-rule" aria-labelledby="notes-title">
       <div className="section-heading">
-        <p className="eyebrow">02 / How I work</p>
+        <div className="section-meta">
+          <p className="eyebrow">02 / How I work</p>
+          <span className="section-subtext">Principles & field notes</span>
+        </div>
         <h2 id="notes-title">Useful beats impressive.</h2>
       </div>
       <div className="notes-grid">
