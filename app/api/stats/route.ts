@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getStats, incrementViews, incrementLikes } from "@/lib/db";
+import { getStats, incrementViews, incrementProjectLike } from "@/lib/db";
+import { ApiResponse, StatsData } from "@/types";
 
-export async function GET() {
+export async function GET(): Promise<NextResponse<ApiResponse<StatsData>>> {
   try {
     const stats = await getStats();
     return NextResponse.json({
@@ -9,9 +10,12 @@ export async function GET() {
       data: stats,
     });
   } catch (error) {
-    console.error("Error fetching stats:", error);
+    console.error("[api/stats] Fetch error:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to fetch stats" },
+      {
+        success: false,
+        error: "Failed to fetch stats",
+      },
       { status: 500 }
     );
   }
@@ -19,20 +23,35 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json().catch(() => ({}));
-    const action = body.action || "view";
-
-    if (action === "like") {
-      const likes = await incrementLikes();
-      return NextResponse.json({ success: true, likes });
+    let body: { action?: string; projectId?: string } = {};
+    try {
+      body = await req.json();
+    } catch {
+      body = {};
     }
 
-    const views = await incrementViews();
-    return NextResponse.json({ success: true, views });
+    const { action = "view", projectId } = body;
+
+    if (action === "like" && projectId) {
+      const result = await incrementProjectLike(projectId);
+      return NextResponse.json({
+        success: true,
+        data: result,
+      });
+    }
+
+    const result = await incrementViews();
+    return NextResponse.json({
+      success: true,
+      data: result,
+    });
   } catch (error) {
-    console.error("Error updating stats:", error);
+    console.error("[api/stats] Increment error:", error);
     return NextResponse.json(
-      { success: false, error: "Failed to update stats" },
+      {
+        success: false,
+        error: "Failed to update stats",
+      },
       { status: 500 }
     );
   }

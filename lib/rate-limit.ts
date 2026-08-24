@@ -1,21 +1,21 @@
 import { Ratelimit } from "@upstash/ratelimit";
 import { redis } from "./db";
 
-// In-memory token bucket rate limiter for development fallback
-class MemoryRateLimiter {
-  private hits: Map<string, number[]> = new Map();
+// In-memory sliding window rate limiter used when Redis is not available
+class MemorySlidingWindowLimiter {
+  private requests: Map<string, number[]> = new Map();
   private maxRequests: number;
   private windowMs: number;
 
-  constructor(maxRequests = 5, windowMs = 60000) {
+  constructor(maxRequests = 5, windowMs = 60 * 1000) {
     this.maxRequests = maxRequests;
     this.windowMs = windowMs;
   }
 
   async limit(identifier: string): Promise<{ success: boolean; limit: number; remaining: number; reset: number }> {
     const now = Date.now();
-    const timestamps = this.hits.get(identifier) || [];
-    const validTimestamps = timestamps.filter(time => now - time < this.windowMs);
+    const timestamps = this.requests.get(identifier) || [];
+    const validTimestamps = timestamps.filter((time) => now - time < this.windowMs);
 
     if (validTimestamps.length >= this.maxRequests) {
       return {
@@ -27,7 +27,7 @@ class MemoryRateLimiter {
     }
 
     validTimestamps.push(now);
-    this.hits.set(identifier, validTimestamps);
+    this.requests.set(identifier, validTimestamps);
 
     return {
       success: true,
@@ -38,18 +38,24 @@ class MemoryRateLimiter {
   }
 }
 
-const memoryLimiter = new MemoryRateLimiter(5, 60 * 1000); // 5 requests per minute
+const memoryLimiter = new MemorySlidingWindowLimiter(5, 60 * 1000); // 5 requests per 60 seconds
 
 const upstashLimiter = redis
   ? new Ratelimit({
       redis,
       limiter: Ratelimit.slidingWindow(5, "60 s"),
-      analytics: true,
+      analytics: false,
       prefix: "@portfolio/ratelimit",
     })
   : null;
 
-export async function checkRateLimit(identifier: string) {
+export async function checkRateLimit(identifier: string): Promise<{
+  success: boolean;
+  limit: number;
+  remaining: number;
+  reset: number;
+  strategy: "upstash" | "memory";
+}> {
   if (upstashLimiter) {
     try {
       const res = await upstashLimiter.limit(identifier);
@@ -58,11 +64,16 @@ export async function checkRateLimit(identifier: string) {
         limit: res.limit,
         remaining: res.remaining,
         reset: res.reset,
+        strategy: "upstash",
       };
     } catch (err) {
-      console.warn("Upstash rate limiter error, falling back to memory:", err);
+      console.warn("[rate-limit] Upstash rate limit error, falling back to memory:", err);
     }
   }
 
-  return await memoryLimiter.limit(identifier);
+  const memoryRes = await memoryLimiter.limit(identifier);
+  return {
+    ...memoryRes,
+    strategy: "memory",
+  };
 }

@@ -42,19 +42,32 @@ export interface ContactPayload {
   name: string;
   email: string;
   message: string;
-  _gotcha?: string; // Honeypot field
+  _gotcha?: string;
 }
 
 export interface ContactResponse {
   success: boolean;
   message: string;
+  submissionId?: string;
   errors?: Record<string, string[]>;
 }
 
 export interface StatsData {
-  views: number;
-  likes: number;
-  projectViews: Record<string, number>;
+  totalViews: number;
+  projectLikes: Record<string, number>;
+  storage: "redis" | "memory";
+}
+
+export interface HealthResponse {
+  status: "ok" | "degraded" | "error";
+  uptime: number;
+  timestamp: string;
+  service: string;
+  environment: string;
+  features: {
+    redis: boolean;
+    resend: boolean;
+  };
 }
 
 export interface ApiResponse<T = unknown> {

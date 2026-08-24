@@ -19,7 +19,7 @@ const dmMono = DM_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#f5f0e8",
+  themeColor: "#f4f2ed",
   width: "device-width",
   initialScale: 1,
 };
@@ -33,12 +33,11 @@ export const metadata: Metadata = {
   keywords: [
     "Sanghpal Bhakte",
     "Builder",
-    "Student Developer",
-    "AI & Data Science",
+    "AI & Data Science Student",
     "Clarity Desk",
     "Full Stack Developer",
-    "UI/UX Design",
-    "Next.js Portfolio",
+    "Product Design",
+    "Next.js",
   ],
   openGraph: {
     type: "website",
@@ -49,13 +48,15 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: siteConfig.title,
     description: siteConfig.description,
-    creator: "@SanghpalBhakte",
   },
   alternates: {
     canonical: siteConfig.url,
+  },
+  icons: {
+    icon: "/favicon.svg",
   },
 };
 
@@ -69,14 +70,16 @@ export default function RootLayout({
     "@type": "Person",
     name: siteConfig.name,
     url: siteConfig.url,
-    jobTitle: "Builder & AI/Data Science Student",
+    jobTitle: "Student & Builder",
     description: siteConfig.description,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Chhatrapati Sambhajinagar",
       addressCountry: "India",
     },
-    sameAs: siteConfig.socials.map((s) => s.url).filter((u) => !u.startsWith("mailto:")),
+    sameAs: siteConfig.socials
+      .map((s) => s.url)
+      .filter((u) => !u.startsWith("mailto:")),
   };
 
   return (

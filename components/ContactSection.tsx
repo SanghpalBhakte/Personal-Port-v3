@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { siteConfig } from "@/lib/data";
 import { useToast } from "./Toast";
-import { Button } from "./ui/Button";
 
 export const ContactSection: React.FC = () => {
   const { showToast } = useToast();
@@ -13,7 +12,7 @@ export const ContactSection: React.FC = () => {
     name: "",
     email: "",
     message: "",
-    _gotcha: "", // Honeypot spam trap
+    _gotcha: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string[]>>({});
@@ -22,7 +21,7 @@ export const ContactSection: React.FC = () => {
     try {
       await navigator.clipboard.writeText(siteConfig.contactEmail);
       setCopyStatus("Copied");
-      showToast("Email address copied to clipboard!", "success");
+      showToast("Email address copied to clipboard.", "success");
     } catch {
       setCopyStatus(`Email: ${siteConfig.contactEmail}`);
     }
@@ -65,12 +64,11 @@ export const ContactSection: React.FC = () => {
         }
         showToast(result.message || "Failed to send message.", "error");
       } else {
-        showToast("Message sent successfully! Thank you.", "success");
+        showToast(result.message || "Message sent successfully.", "success");
         setFormData({ name: "", email: "", message: "", _gotcha: "" });
         setIsFormOpen(false);
       }
-    } catch (err) {
-      console.error("Submission error:", err);
+    } catch {
       showToast("Network error. Please try again or email directly.", "error");
     } finally {
       setIsSubmitting(false);
@@ -110,23 +108,20 @@ export const ContactSection: React.FC = () => {
         </span>
         <button
           type="button"
+          className="form-toggle-btn"
           onClick={() => setIsFormOpen(!isFormOpen)}
-          className="ml-auto text-[10px] font-mono border border-[#747b74] px-2 py-1 hover:border-[var(--accent)] text-[#d4d7d0] hover:text-white transition-colors"
+          style={{ marginLeft: "auto" }}
         >
-          {isFormOpen ? "Close message form ↑" : "Send a quick note ↓"}
+          {isFormOpen ? "Close note form ↑" : "Send a quick note ↓"}
         </button>
       </div>
 
-      {/* Interactive Serverless Contact Form */}
       {isFormOpen && (
-        <div className="mt-8 pt-8 border-t border-[#59615b] max-w-xl animate-fade-in">
-          <h3 className="font-mono text-xs text-[#b9beb7] uppercase tracking-wider mb-4">
-            Send a direct message
-          </h3>
-          <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
-            {/* Honeypot field - invisible to real users, catches bots */}
-            <div className="hidden" aria-hidden="true">
-              <label htmlFor="_gotcha">Leave this field blank</label>
+        <div className="note-form-wrapper">
+          <form onSubmit={handleSubmit} className="note-form">
+            {/* Honeypot field for spam detection */}
+            <div style={{ display: "none" }} aria-hidden="true">
+              <label htmlFor="_gotcha">Leave this blank</label>
               <input
                 type="text"
                 id="_gotcha"
@@ -138,10 +133,8 @@ export const ContactSection: React.FC = () => {
               />
             </div>
 
-            <div>
-              <label htmlFor="name" className="block text-[#abb0aa] mb-1">
-                Name *
-              </label>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 id="name"
@@ -150,17 +143,14 @@ export const ContactSection: React.FC = () => {
                 value={formData.name}
                 onChange={handleInputChange}
                 placeholder="Your name"
-                className="w-full bg-[#181a18] border border-[#59615b] focus:border-[var(--accent)] text-white px-3 py-2 outline-none font-sans text-sm"
               />
               {formErrors.name && (
-                <p className="text-[#b94a32] text-[11px] mt-1">{formErrors.name[0]}</p>
+                <span className="form-field-error">{formErrors.name[0]}</span>
               )}
             </div>
 
-            <div>
-              <label htmlFor="email" className="block text-[#abb0aa] mb-1">
-                Email *
-              </label>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
@@ -168,18 +158,15 @@ export const ContactSection: React.FC = () => {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                placeholder="your.email@example.com"
-                className="w-full bg-[#181a18] border border-[#59615b] focus:border-[var(--accent)] text-white px-3 py-2 outline-none font-sans text-sm"
+                placeholder="name@example.com"
               />
               {formErrors.email && (
-                <p className="text-[#b94a32] text-[11px] mt-1">{formErrors.email[0]}</p>
+                <span className="form-field-error">{formErrors.email[0]}</span>
               )}
             </div>
 
-            <div>
-              <label htmlFor="message" className="block text-[#abb0aa] mb-1">
-                Message *
-              </label>
+            <div className="form-group">
+              <label htmlFor="message">Message</label>
               <textarea
                 id="message"
                 name="message"
@@ -188,25 +175,20 @@ export const ContactSection: React.FC = () => {
                 value={formData.message}
                 onChange={handleInputChange}
                 placeholder="What are you working on or thinking about?"
-                className="w-full bg-[#181a18] border border-[#59615b] focus:border-[var(--accent)] text-white px-3 py-2 outline-none font-sans text-sm resize-y"
               />
               {formErrors.message && (
-                <p className="text-[#b94a32] text-[11px] mt-1">{formErrors.message[0]}</p>
+                <span className="form-field-error">{formErrors.message[0]}</span>
               )}
             </div>
 
-            <div className="flex items-center gap-4 pt-2">
-              <Button
+            <div className="form-actions">
+              <button
                 type="submit"
-                variant="primary"
-                size="md"
-                isLoading={isSubmitting}
+                className="submit-btn"
+                disabled={isSubmitting}
               >
-                Send Message ↗
-              </Button>
-              <span className="text-[10px] text-[#abb0aa]">
-                Protected by rate limiting & honeypot.
-              </span>
+                {isSubmitting ? "Sending..." : "Send note ↗"}
+              </button>
             </div>
           </form>
         </div>
