@@ -285,33 +285,19 @@ em {
   transform: translateY(3px);
 }
 
-/* Identity strip — "made by a student, not an agency" */
+/* Identity strip — the Research→Design→Build→Test→Improve loop */
 .identity-strip {
   margin-top: 44px;
   padding-top: 28px;
   border-top: 2px dashed var(--rule);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px 40px;
 }
 
-.identity-copy h2 {
-  margin: 0 0 8px;
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-size: clamp(22px, 2.4vw, 30px);
+.loop-label {
+  color: var(--ink);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-
-.identity-copy p {
-  margin: 0;
-  max-width: 460px;
-  color: var(--body-text);
-  font-size: 15px;
-  line-height: 1.55;
+  padding-right: 12px;
+  margin-right: 3px;
+  border-right: 1px solid var(--rule);
 }
 
 .loop-chips {
@@ -1056,35 +1042,47 @@ footer h2 a:hover {
   }
 }
 
-/* Custom Cursor */
+/* Custom Cursor — a loose ink dot and a hand-sketched ring, not a precise digital pointer */
 .cursor-dot,
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
-  border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: opacity 0.2s, width 0.2s, height 0.2s, border-color 0.2s;
+  transition: opacity 0.2s, width 0.2s, height 0.2s;
 }
 
 .cursor-dot {
-  width: 5px;
-  height: 5px;
+  width: 7px;
+  height: 7px;
   background: var(--accent);
+  border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%;
 }
 
 .cursor-ring {
-  width: 26px;
-  height: 26px;
-  border: 1px solid var(--ink);
+  width: 30px;
+  height: 30px;
+}
+
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.5px dashed var(--ink);
+  border-radius: 50%;
+  transition: border-color 0.25s ease, transform 0.3s ease;
 }
 
 .cursor-active {
-  width: 44px !important;
-  height: 44px !important;
+  width: 46px !important;
+  height: 46px !important;
+}
+
+.cursor-active::before {
   border-color: var(--accent) !important;
+  transform: rotate(16deg);
 }
 
 /* Scroll Reveal */
@@ -1237,8 +1235,6 @@ footer h2 a:hover {
   }
 
   .identity-strip {
-    flex-direction: column;
-    align-items: flex-start;
     margin-top: 32px;
     padding-top: 22px;
   }

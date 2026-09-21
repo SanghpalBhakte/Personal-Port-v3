@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/lib/data";
+import { LocalClock } from "./LocalClock";
 
 export const Hero: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ export const Hero: React.FC = () => {
       <div className="hero-label">
         <div className="hero-meta-left">
           <p className="eyebrow">{siteConfig.name} / 2026</p>
-          <span className="hero-submeta">{siteConfig.coordinates}</span>
+          <LocalClock />
         </div>
         <p className="availability">
           <span className="status-dot" aria-hidden="true" />
@@ -33,11 +34,8 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="identity-strip">
-        <div className="identity-copy">
-          <h2>Made by a student, not an agency.</h2>
-          <p>One person, start to finish — research, design, build, test, improve. Same hands on every project here.</p>
-        </div>
         <div className="loop-chips">
+          <span className="loop-label">The loop</span>
           <span className="chip marked">Research</span>
           <span>&rarr;</span>
           <span className="chip">Design</span>
