@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, DM_Mono } from "next/font/google";
+import { DM_Sans, DM_Mono, Bricolage_Grotesque, Caveat } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/data";
 import { ToastProvider } from "@/components/Toast";
@@ -15,6 +15,19 @@ const dmMono = DM_Mono({
   weight: ["400", "500"],
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  weight: ["500", "600"],
+  subsets: ["latin"],
+  variable: "--font-hand",
   display: "swap",
 });
 
@@ -84,7 +97,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${dmSans.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${dmMono.variable} ${bricolage.variable} ${caveat.variable}`}>
       <head>
         <script
           type="application/ld+json"

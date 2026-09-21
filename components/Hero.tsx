@@ -17,7 +17,7 @@ export const Hero: React.FC = () => {
       </div>
       
       <h1 id="hero-title">
-        I build the boring<br />
+        I build the <span className="hl">boring</span><br />
         systems that make<br />
         everything else <em>work.</em>
       </h1>
@@ -30,6 +30,30 @@ export const Hero: React.FC = () => {
           <span>See what I’m working on</span>
           <span className="arrow-glyph" aria-hidden="true">↓</span>
         </Link>
+      </div>
+
+      <div className="identity-strip">
+        <div className="identity-copy">
+          <h2>Made by a student, not an agency.</h2>
+          <p>One person, start to finish — research, design, build, test, improve. Same hands on every project here.</p>
+        </div>
+        <div className="loop-chips">
+          <span className="chip marked">Research</span>
+          <span>&rarr;</span>
+          <span className="chip">Design</span>
+          <span>&rarr;</span>
+          <span className="chip">Build</span>
+          <span>&rarr;</span>
+          <span className="chip">Test</span>
+          <span>&rarr;</span>
+          <span className="chip marked">Improve</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M4 12a8 8 0 0 1 14-5.3" />
+            <path d="M20 4v4h-4" />
+            <path d="M20 12a8 8 0 0 1-14 5.3" />
+            <path d="M4 20v-4h4" />
+          </svg>
+        </div>
       </div>
     </section>
   );
