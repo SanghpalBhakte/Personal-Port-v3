@@ -40,7 +40,7 @@ export const projects: Project[] = [
     id: "scheme-matching",
     number: "02",
     kind: "AI matchmaking system · Smart India Hackathon",
-    title: "Scheme\nMatching",
+    title: "Scheme\nSetu",
     description: "An AI system that matches marginalized entrepreneurs with the government schemes they actually qualify for. Built with a six-person team for Smart India Hackathon — I led research, product direction, and the AI approach.",
     status: "SMART INDIA HACKATHON /\nTEAM OF 6",
     tags: ["AI & ML", "Research", "Product lead"],
