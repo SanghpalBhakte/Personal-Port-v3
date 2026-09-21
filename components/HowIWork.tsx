@@ -17,7 +17,7 @@ const Note: React.FC<{ note: NoteItem; idx: number }> = ({ note, idx }) => {
 };
 
 export const HowIWork: React.FC = () => {
-  const manifesto = useReveal<HTMLParagraphElement>(0);
+  const manifesto = useReveal<HTMLDivElement>(0);
 
   return (
     <section id="notes" className="notes section-rule" aria-labelledby="notes-title">
@@ -29,9 +29,26 @@ export const HowIWork: React.FC = () => {
         <h2 id="notes-title">Useful beats impressive.</h2>
       </div>
       <div className="notes-grid">
-        <p ref={manifesto.ref} className={`manifesto ${manifesto.className}`} style={manifesto.style}>
-          I like building the quiet parts: tools that make a busy day easier to understand and a small process easier to keep moving.
-        </p>
+        <div ref={manifesto.ref} className={`manifesto-block ${manifesto.className}`} style={manifesto.style}>
+          <svg
+            className="loop-mark"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 12a8 8 0 0 1 14-5.3" />
+            <path d="M20 4v4h-4" />
+            <path d="M20 12a8 8 0 0 1-14 5.3" />
+            <path d="M4 20v-4h4" />
+          </svg>
+          <p className="manifesto">
+            I like building the quiet parts: tools that make a busy day easier to understand and a small process easier to keep moving. It&rsquo;s a loop, not a checklist &mdash; I come back to it on every project.
+          </p>
+        </div>
         {notes.map((note, idx) => (
           <Note key={note.number} note={note} idx={idx} />
         ))}

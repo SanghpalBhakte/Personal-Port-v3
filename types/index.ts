@@ -25,6 +25,8 @@ export interface VisualWorkItem {
   description: string;
   url: string;
   ctaText: string;
+  /** Verified Behance CDN cover image URL. Leave "" if not independently verified — never guess one. */
+  thumbnail: string;
 }
 
 export interface ToolGroup {

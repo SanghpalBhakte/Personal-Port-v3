@@ -95,6 +95,10 @@ export const notes: NoteItem[] = [
   },
 ];
 
+// Each thumbnail URL below was verified with a direct HTTP request (HTTP 200 + image
+// content-type) before being added — never guessed. To add another piece from Behance,
+// verify its cover image the same way and paste the confirmed URL; leave thumbnail: ""
+// (VisualWork.tsx falls back to a plain card) if you can't verify one yet.
 export const visualWorks: VisualWorkItem[] = [
   {
     id: "esummit",
@@ -104,6 +108,7 @@ export const visualWorks: VisualWorkItem[] = [
     description: "A selection of social-media and event design work for E-Summit.",
     url: "https://www.behance.net/gallery/252873023/E-Summit-Social-Media-Graphic-Design-Showcase",
     ctaText: "VIEW PROJECT ↗",
+    thumbnail: "https://mir-s3-cdn-cf.behance.net/projects/404/fd5efd252873023.Y3JvcCwzMzc1LDI2MzksMCw5Mjc.jpg",
   },
   {
     id: "fortnite",
@@ -113,6 +118,7 @@ export const visualWorks: VisualWorkItem[] = [
     description: "Freelance thumbnail work made for quick, clear visual impact.",
     url: "https://www.behance.net/gallery/110221073/Fortnite-Thumbnails",
     ctaText: "VIEW PROJECT ↗",
+    thumbnail: "https://mir-s3-cdn-cf.behance.net/projects/404/20a210110221073.Y3JvcCwxMDA3LDc4OCwzODksMA.png",
   },
   {
     id: "irl-thumbnails",
@@ -122,6 +128,7 @@ export const visualWorks: VisualWorkItem[] = [
     description: "A collection of thumbnail design work.",
     url: "https://www.behance.net/gallery/112701177/IRL-Thumbnails",
     ctaText: "VIEW PROJECT ↗",
+    thumbnail: "https://mir-s3-cdn-cf.behance.net/projects/404/c7ec01112701177.Y3JvcCw1MzEsNDE1LDQ1NSwxNQ.png",
   },
 ];
 

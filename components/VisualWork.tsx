@@ -1,12 +1,15 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { visualWorks } from "@/lib/data";
 import { useReveal } from "@/lib/useReveal";
 import type { VisualWorkItem } from "@/types";
 
 const GfxCard: React.FC<{ work: VisualWorkItem; idx: number }> = ({ work, idx }) => {
   const reveal = useReveal<HTMLAnchorElement>(idx * 90);
+  const flatTitle = work.title.replace(/\n/g, " ");
+
   return (
     <a
       ref={reveal.ref}
@@ -16,17 +19,30 @@ const GfxCard: React.FC<{ work: VisualWorkItem; idx: number }> = ({ work, idx })
       target="_blank"
       rel="noreferrer"
     >
-      <p className="eyebrow">{work.eyebrow}</p>
-      <h3>
-        {work.title.split("\n").map((line, i) => (
-          <React.Fragment key={i}>
-            {line}
-            {i < work.title.split("\n").length - 1 && <br />}
-          </React.Fragment>
-        ))}
-      </h3>
-      <p>{work.description}</p>
-      <span className="gfx-cta">{work.ctaText}</span>
+      {work.thumbnail && (
+        <div className="gfx-thumb">
+          <Image
+            src={work.thumbnail}
+            alt={`Cover image for the ${flatTitle} project on Behance`}
+            fill
+            sizes="(max-width: 900px) 100vw, 33vw"
+            className="gfx-thumb-img"
+          />
+        </div>
+      )}
+      <div className="gfx-body">
+        <p className="eyebrow">{work.eyebrow}</p>
+        <h3>
+          {work.title.split("\n").map((line, i) => (
+            <React.Fragment key={i}>
+              {line}
+              {i < work.title.split("\n").length - 1 && <br />}
+            </React.Fragment>
+          ))}
+        </h3>
+        <p>{work.description}</p>
+        <span className="gfx-cta">{work.ctaText}</span>
+      </div>
     </a>
   );
 };
