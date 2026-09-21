@@ -33,7 +33,8 @@ export const projects: Project[] = [
     note: "Previously called Campus OS.",
     status: "IN DEVELOPMENT /\nACTIVE TESTING",
     tags: ["Vanilla JavaScript", "Firebase", "PWA"],
-    linkText: "Link coming soon.",
+    link: "https://campusos-83365.web.app/#dashboard",
+    linkText: "View live",
   },
   {
     id: "scheme-matching",
@@ -43,7 +44,8 @@ export const projects: Project[] = [
     description: "An AI system that matches marginalized entrepreneurs with the government schemes they actually qualify for. Built with a six-person team for Smart India Hackathon — I led research, product direction, and the AI approach.",
     status: "SMART INDIA HACKATHON /\nTEAM OF 6",
     tags: ["AI & ML", "Research", "Product lead"],
-    linkText: "Write-up coming soon.",
+    link: "https://sih-ai-scheme-matcher-v2.vercel.app/",
+    linkText: "View live",
   },
   {
     id: "sweep",
@@ -53,7 +55,8 @@ export const projects: Project[] = [
     description: "A simpler way to keep track of subscriptions and everyday money — designed to feel calm, not like another busy dashboard.",
     status: "IN DEVELOPMENT /\nACTIVE REDESIGN",
     tags: ["Product design", "Dashboard UX"],
-    linkText: "Private work in progress.",
+    link: "https://sift-sand.vercel.app/",
+    linkText: "View live",
   },
   {
     id: "rivet",
