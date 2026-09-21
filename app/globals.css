@@ -1042,7 +1042,13 @@ footer h2 a:hover {
   }
 }
 
-/* Custom Cursor — a loose ink dot and a hand-sketched ring, not a precise digital pointer */
+/* Custom Cursor — a pen-nib pointer with a trailing ink stroke, standing in for the system arrow */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  * {
+    cursor: none !important;
+  }
+}
+
 .cursor-dot,
 .cursor-ring {
   position: fixed;
@@ -1051,38 +1057,51 @@ footer h2 a:hover {
   z-index: 9999;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: opacity 0.2s, width 0.2s, height 0.2s;
+  transition: opacity 0.2s;
 }
 
+/* The nib — sits exactly on the pointer, no lag, standing in for the arrow */
 .cursor-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--accent);
-  border-radius: 42% 58% 63% 37% / 45% 40% 60% 55%;
+  width: 13px;
+  height: 13px;
 }
 
+.cursor-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  clip-path: polygon(50% 0%, 100% 62%, 52% 100%, 0% 46%);
+  transform: rotate(-38deg);
+  transition: background-color 0.2s ease;
+}
+
+/* The stroke — trails with a slight lag, like ink dragging behind the nib */
 .cursor-ring {
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 4px;
 }
 
 .cursor-ring::before {
   content: "";
   position: absolute;
   inset: 0;
-  border: 1.5px dashed var(--ink);
-  border-radius: 50%;
-  transition: border-color 0.25s ease, transform 0.3s ease;
+  background: var(--ink);
+  border-radius: 3px;
+  opacity: 0.5;
+  transform: rotate(-6deg);
+  transition: opacity 0.25s ease, background-color 0.25s ease, transform 0.3s ease;
 }
 
 .cursor-active {
-  width: 46px !important;
-  height: 46px !important;
+  width: 58px !important;
+  height: 5px !important;
 }
 
 .cursor-active::before {
-  border-color: var(--accent) !important;
-  transform: rotate(16deg);
+  background: var(--accent) !important;
+  opacity: 0.9 !important;
+  transform: rotate(-2deg) !important;
 }
 
 /* Scroll Reveal */

@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 
 const formatTime = () =>
-  new Intl.DateTimeFormat("en-GB", {
+  new Intl.DateTimeFormat("en-US", {
     timeZone: "Asia/Kolkata",
-    hour: "2-digit",
+    hour: "numeric",
     minute: "2-digit",
     second: "2-digit",
-    hour12: false,
+    hour12: true,
   }).format(new Date());
 
 export const LocalClock: React.FC = () => {
