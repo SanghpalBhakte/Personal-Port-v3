@@ -1,26 +1,30 @@
 :root {
-  --paper: #f4f2ed;
-  --ink: #202421;
-  --muted: #626863;
-  --rule: #c7c7bf;
-  --accent: #b94a32;
-  --quiet: #e7e6df;
-  --body-text: #383e39;
+  /* Workbench palette — kraft paper, warm ink, marker accents */
+  --paper: #efe4c9;
+  --ink: #2b2013;
+  --muted: #655a3f;
+  --rule: #d8c9a3;
+  --accent: #a83d1a;
+  --quiet: #e4d6b0;
+  --body-text: #4a3f2c;
+  --highlight: #ffd54a;
+  --accent-2: #2d4fa3;
+  --card-surface: #fbf6e8;
 
-  /* Dark surface (footer) */
-  --ink-line: var(--ink-line);
-  --ink-line-soft: var(--ink-line-soft);
-  --ink-muted: var(--ink-muted);
-  --ink-muted-2: var(--ink-muted-2);
-  --ink-text: var(--ink-text);
-  --ink-input-bg: var(--ink-input-bg);
+  /* Dark surface (footer) — light-on-dark variants of the same palette */
+  --ink-line: rgba(241, 231, 206, 0.22);
+  --ink-line-soft: rgba(241, 231, 206, 0.14);
+  --ink-muted: rgba(241, 231, 206, 0.62);
+  --ink-muted-2: rgba(241, 231, 206, 0.4);
+  --ink-text: #f1e7ce;
+  --ink-input-bg: rgba(241, 231, 206, 0.06);
 
   /* Status */
-  --success: var(--success);
-  --success-bg: var(--success-bg);
-  --success-text: var(--success-text);
-  --error-bg: var(--error-bg);
-  --error-text: var(--error-text);
+  --success: #4c9a6a;
+  --success-bg: rgba(76, 154, 106, 0.16);
+  --success-text: #eaf6ee;
+  --error-bg: rgba(196, 62, 42, 0.18);
+  --error-text: #fceae4;
 }
 
 * {
@@ -33,7 +37,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image: radial-gradient(rgba(43, 32, 19, 0.05) 1px, transparent 1px);
+  background-size: 9px 9px;
   color: var(--ink);
   font-family: var(--font-sans), "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
@@ -55,6 +61,21 @@ button:focus-visible {
 
 .font-mono {
   font-family: var(--font-mono), "DM Mono", monospace;
+}
+
+h1,
+.section-heading h2,
+.project h3,
+footer h2,
+.now h2,
+.archive h2,
+.toolbox h2 {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+.hl {
+  background: linear-gradient(180deg, transparent 58%, var(--highlight) 58%);
+  padding: 0 2px;
 }
 
 .site-header,
@@ -167,8 +188,9 @@ nav a:hover::after {
 
 .availability {
   margin: 0;
-  color: var(--muted);
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  color: var(--accent-2);
+  font-family: var(--font-hand), cursive;
+  font-size: 21px;
   display: flex;
   align-items: center;
 }
@@ -263,6 +285,59 @@ em {
   transform: translateY(3px);
 }
 
+/* Identity strip — "made by a student, not an agency" */
+.identity-strip {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 2px dashed var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px 40px;
+}
+
+.identity-copy h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.identity-copy p {
+  margin: 0;
+  max-width: 460px;
+  color: var(--body-text);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.loop-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  font: 11px var(--font-mono), "DM Mono", monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.loop-chips .chip.marked {
+  background: linear-gradient(180deg, transparent 58%, var(--highlight) 58%);
+  padding: 2px 3px;
+  color: var(--ink);
+}
+
+.loop-chips svg {
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
+  color: var(--ink);
+}
+
 /* Section Headings & Balanced Left Rail */
 .section-heading {
   display: grid;
@@ -299,19 +374,41 @@ em {
 }
 
 .project {
+  position: relative;
   display: grid;
   grid-template-columns: 52px 1.05fr 2.15fr 1.25fr;
   gap: 25px;
-  padding: 32px 16px 36px 8px;
-  border-top: 1px solid var(--rule);
+  padding: 32px 24px 36px 20px;
+  margin-top: 22px;
+  background: var(--card-surface);
+  border: 1px solid rgba(43, 32, 19, 0.14);
   min-height: 235px;
-  border-radius: 2px;
-  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  border-radius: 3px;
+  box-shadow: 0 4px 12px rgba(43, 32, 19, 0.06);
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.project:first-child {
+  margin-top: 0;
+}
+
+.project::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 28px;
+  width: 54px;
+  height: 18px;
+  background: rgba(216, 201, 163, 0.8);
+  border: 1px solid rgba(43, 32, 19, 0.12);
+  transform: rotate(-2deg);
 }
 
 .project:hover {
-  background-color: rgba(32, 36, 33, 0.025);
-  border-top-color: var(--ink);
+  background-color: #fdfaef;
+  border-color: var(--ink);
+  box-shadow: 0 8px 20px rgba(43, 32, 19, 0.1);
+  transform: translateY(-2px);
 }
 
 .project-number {
@@ -409,9 +506,9 @@ em {
 }
 
 .project:hover .tag-badge {
-  border-color: var(--ink-muted-2);
+  border-color: var(--ink);
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .project-note {
@@ -502,20 +599,33 @@ em {
 
 .gfx-display {
   min-height: 220px;
-  background: var(--quiet);
-  border: 1px solid var(--rule);
+  background: var(--card-surface);
+  border: 1px solid rgba(43, 32, 19, 0.14);
   text-decoration: none;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(43, 32, 19, 0.06);
   transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.gfx-layout > a:nth-child(3n+1) {
+  transform: rotate(-1.4deg);
+}
+
+.gfx-layout > a:nth-child(3n+2) {
+  transform: rotate(1deg);
+}
+
+.gfx-layout > a:nth-child(3n+3) {
+  transform: rotate(-0.9deg);
+}
+
 .gfx-display:hover {
-  background-color: #dfddd4;
+  background-color: #fdfaef;
   border-color: var(--ink);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 0 10px 26px rgba(43, 32, 19, 0.12);
 }
 
 .gfx-thumb {
@@ -1124,6 +1234,13 @@ footer h2 a:hover {
   .arrow-link {
     display: flex;
     justify-content: flex-start;
+  }
+
+  .identity-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 32px;
+    padding-top: 22px;
   }
 
   .section-heading {
