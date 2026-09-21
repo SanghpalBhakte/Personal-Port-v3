@@ -47,14 +47,11 @@ portfolio/
 │   ├── globals.css               # Editorial CSS styles and animations
 │   ├── icon.svg                  # Favicon SVG asset for Next.js metadata
 │   ├── layout.tsx                # Fonts, metadata, JSON-LD schema
+│   ├── opengraph-image.tsx       # Generated social share image (Next.js ImageResponse)
 │   ├── page.tsx                  # Single-page layout
 │   ├── robots.ts                 # Dynamic robots.txt
 │   └── sitemap.ts                # Dynamic sitemap generator
 ├── components/
-│   ├── ui/
-│   │   ├── Button.tsx            # Button primitive
-│   │   ├── Pill.tsx              # Status pill primitive
-│   │   └── Tag.tsx               # Tech tag primitive
 │   ├── ContactSection.tsx        # Footer, social links, copy email, note form
 │   ├── CustomCursor.tsx          # Interactive cursor dot and ring
 │   ├── Header.tsx                # Top navigation and wordmark

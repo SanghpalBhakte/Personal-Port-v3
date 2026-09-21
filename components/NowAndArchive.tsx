@@ -1,10 +1,21 @@
+"use client";
+
 import React from "react";
 import { siteConfig, archives } from "@/lib/data";
+import { useReveal } from "@/lib/useReveal";
 
 export const NowAndArchive: React.FC = () => {
+  const now = useReveal<HTMLElement>(0);
+  const archiveReveal = useReveal<HTMLElement>(0);
+
   return (
     <>
-      <section className="now section-rule" aria-labelledby="now-title">
+      <section
+        ref={now.ref}
+        className={`now section-rule ${now.className}`}
+        style={now.style}
+        aria-labelledby="now-title"
+      >
         <div className="section-meta">
           <p className="eyebrow">05 / Now</p>
           <span className="section-subtext">Current focus & learning</span>
@@ -18,7 +29,12 @@ export const NowAndArchive: React.FC = () => {
         </div>
       </section>
 
-      <section className="archive section-rule" aria-labelledby="archive-title">
+      <section
+        ref={archiveReveal.ref}
+        className={`archive section-rule ${archiveReveal.className}`}
+        style={archiveReveal.style}
+        aria-labelledby="archive-title"
+      >
         <div className="section-meta">
           <p className="eyebrow">06 / Earlier experiments</p>
           <span className="section-subtext">Historical portfolio iterations</span>

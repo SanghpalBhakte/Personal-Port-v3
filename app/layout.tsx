@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     "Builder",
     "AI & Data Science Student",
     "Clarity Desk",
+    "Smart India Hackathon",
     "Full Stack Developer",
     "Product Design",
     "Next.js",
@@ -91,6 +92,9 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <noscript>
+          <style>{`.reveal { opacity: 1 !important; transform: none !important; } .hero-label, .hero > h1, .hero-foot { animation: none !important; }`}</style>
+        </noscript>
         <ToastProvider>
           {children}
           <CustomCursor />

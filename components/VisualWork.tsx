@@ -1,5 +1,35 @@
+"use client";
+
 import React from "react";
 import { visualWorks } from "@/lib/data";
+import { useReveal } from "@/lib/useReveal";
+import type { VisualWorkItem } from "@/types";
+
+const GfxCard: React.FC<{ work: VisualWorkItem; idx: number }> = ({ work, idx }) => {
+  const reveal = useReveal<HTMLAnchorElement>(idx * 90);
+  return (
+    <a
+      ref={reveal.ref}
+      className={`gfx-display ${reveal.className}`}
+      style={reveal.style}
+      href={work.url}
+      target="_blank"
+      rel="noreferrer"
+    >
+      <p className="eyebrow">{work.eyebrow}</p>
+      <h3>
+        {work.title.split("\n").map((line, i) => (
+          <React.Fragment key={i}>
+            {line}
+            {i < work.title.split("\n").length - 1 && <br />}
+          </React.Fragment>
+        ))}
+      </h3>
+      <p>{work.description}</p>
+      <span className="gfx-cta">{work.ctaText}</span>
+    </a>
+  );
+};
 
 export const VisualWork: React.FC = () => {
   return (
@@ -15,28 +45,8 @@ export const VisualWork: React.FC = () => {
         </h2>
       </div>
       <div className="gfx-layout">
-        {visualWorks.map((work) => (
-          <a
-            key={work.id}
-            className="gfx-display"
-            href={work.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <p className="eyebrow">{work.eyebrow}</p>
-            <h3>
-              {work.title.split("\n").map((line, i) => (
-                <React.Fragment key={i}>
-                  {line}
-                  {i < work.title.split("\n").length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </h3>
-            <p>{work.description}</p>
-            <span className="gfx-cta">
-              {work.ctaText}
-            </span>
-          </a>
+        {visualWorks.map((work, idx) => (
+          <GfxCard key={work.id} work={work} idx={idx} />
         ))}
       </div>
     </section>
