@@ -79,7 +79,16 @@ const ProjectCard: React.FC<{ project: Project; idx: number }> = ({ project, idx
             </span>
           ))}
         </div>
-        {project.linkText && <p className="project-note">{project.linkText}</p>}
+        {project.link ? (
+          <a href={project.link} target="_blank" rel="noreferrer" className="project-link">
+            <span>{project.linkText}</span>
+            <span className="project-link-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        ) : (
+          project.linkText && <p className="project-note">{project.linkText}</p>
+        )}
       </div>
     </article>
   );

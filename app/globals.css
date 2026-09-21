@@ -503,6 +503,29 @@ em {
   font: 11px/1.5 var(--font-mono), "DM Mono", monospace;
 }
 
+.project-link {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  color: var(--muted);
+  font: 11px/1.5 var(--font-mono), "DM Mono", monospace;
+  transition: color 0.2s ease;
+}
+
+.project-link-arrow {
+  transition: transform 0.2s ease;
+}
+
+.project-link:hover {
+  color: var(--accent);
+}
+
+.project-link:hover .project-link-arrow {
+  transform: translate(2px, -2px);
+}
+
 /* Notes / How I Work */
 .notes,
 .gfx {
