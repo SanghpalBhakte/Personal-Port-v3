@@ -2,6 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
+// Hovering these turns the trailing stroke into an "underline".
+const INTERACTIVE = "a, button, .project, .gfx-display, [role='button']";
+// Over text fields the real text caret is shown instead of the pen nib.
+const TEXT_FIELD = "input, textarea, [contenteditable='true']";
+
 export const CustomCursor = () => {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -9,32 +14,41 @@ export const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only run if pointer is fine (desktop/mouse) and user hasn't preferred reduced motion
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Only for a mouse/trackpad, and never when the visitor asked for less motion.
     const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
-
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!hasFinePointer || prefersReducedMotion) return;
 
-    let ringX = -100;
-    let ringY = -100;
+    const root = document.documentElement;
     let pointerX = -100;
     let pointerY = -100;
-    let animationFrameId: number;
+    let ringX = -100;
+    let ringY = -100;
+    let frame = 0;
 
     const onMouseMove = (e: MouseEvent) => {
       pointerX = e.clientX;
       pointerY = e.clientY;
-      if (!isVisible) setIsVisible(true);
+
+      // The system arrow is hidden only once the nib is actually tracking the mouse,
+      // so there is never a moment (or a failed script) with no cursor on screen.
+      root.classList.add("has-custom-cursor");
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate(${pointerX}px, ${pointerY}px) translate(-50%, -50%)`;
       }
+
+      // Event delegation: works for elements added after load (e.g. the note form).
+      const target = e.target instanceof Element ? e.target : null;
+      const overTextField = Boolean(target?.closest(TEXT_FIELD));
+      setIsVisible(!overTextField);
+      setIsActive(!overTextField && Boolean(target?.closest(INTERACTIVE)));
     };
 
-    const onMouseEnter = () => setIsActive(true);
-    const onMouseLeave = () => setIsActive(false);
-
-    window.addEventListener("mousemove", onMouseMove);
+    // Pointer left the window: don't leave the nib frozen at the edge.
+    const onMouseOut = (e: MouseEvent) => {
+      if (!e.relatedTarget) setIsVisible(false);
+    };
 
     const follow = () => {
       ringX += (pointerX - ringX) * 0.16;
@@ -42,39 +56,31 @@ export const CustomCursor = () => {
       if (ringRef.current) {
         ringRef.current.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
       }
-      animationFrameId = requestAnimationFrame(follow);
+      frame = requestAnimationFrame(follow);
     };
+    frame = requestAnimationFrame(follow);
 
-    animationFrameId = requestAnimationFrame(follow);
-
-    const interactiveElements = document.querySelectorAll("a, button, .project, .gfx-display, input, textarea");
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", onMouseEnter);
-      el.addEventListener("mouseleave", onMouseLeave);
-    });
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
+    document.addEventListener("mouseout", onMouseOut);
 
     return () => {
+      root.classList.remove("has-custom-cursor");
       window.removeEventListener("mousemove", onMouseMove);
-      cancelAnimationFrame(animationFrameId);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", onMouseEnter);
-        el.removeEventListener("mouseleave", onMouseLeave);
-      });
+      document.removeEventListener("mouseout", onMouseOut);
+      cancelAnimationFrame(frame);
     };
-  }, [isVisible]);
+  }, []);
 
   return (
     <>
       <div
         ref={dotRef}
-        className={`cursor-dot ${isVisible ? "opacity-100" : "opacity-0"}`}
+        className={`cursor-dot ${isVisible ? "cursor-visible" : ""}`}
         aria-hidden="true"
       />
       <div
         ref={ringRef}
-        className={`cursor-ring ${isVisible ? "opacity-100" : "opacity-0"} ${
-          isActive ? "cursor-active" : ""
-        }`}
+        className={`cursor-ring ${isVisible ? "cursor-visible" : ""} ${isActive ? "cursor-active" : ""}`}
         aria-hidden="true"
       />
     </>
