@@ -25,6 +25,7 @@
   --success-text: #eaf6ee;
   --error-bg: rgba(196, 62, 42, 0.18);
   --error-text: #fceae4;
+  --accent-on-dark: #f0997b;
 }
 
 * {
@@ -173,7 +174,6 @@ nav a:hover::after {
 .hero-submeta {
   font: 10px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
-  opacity: 0.75;
   letter-spacing: 0.02em;
 }
 
@@ -202,21 +202,21 @@ nav a:hover::after {
   border-radius: 50%;
   background: var(--accent);
   margin-right: 8px;
-  box-shadow: 0 0 0 0 rgba(185, 74, 50, 0.4);
+  box-shadow: 0 0 0 0 rgba(168, 61, 26, 0.4);
   animation: statusPulse 2.8s infinite ease-in-out;
 }
 
 @keyframes statusPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(185, 74, 50, 0.45);
+    box-shadow: 0 0 0 0 rgba(168, 61, 26, 0.45);
     transform: scale(0.95);
   }
   70% {
-    box-shadow: 0 0 0 7px rgba(185, 74, 50, 0);
+    box-shadow: 0 0 0 7px rgba(168, 61, 26, 0);
     transform: scale(1.05);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(185, 74, 50, 0);
+    box-shadow: 0 0 0 0 rgba(168, 61, 26, 0);
     transform: scale(0.95);
   }
 }
@@ -341,7 +341,6 @@ em {
 .section-subtext {
   font: 11px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
-  opacity: 0.8;
   letter-spacing: 0.01em;
   max-width: 220px;
 }
@@ -504,7 +503,8 @@ em {
 }
 
 .project-link {
-  margin-top: 14px;
+  margin-top: 6px;
+  padding: 8px 0;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -676,7 +676,7 @@ em {
   color: #000;
 }
 
-.gfx-display p {
+.gfx-display p:not(.eyebrow) {
   max-width: 430px;
   margin: 0;
   color: var(--muted);
@@ -729,7 +729,7 @@ em {
 }
 
 .tool-groups p:hover {
-  background-color: rgba(32, 36, 33, 0.015);
+  background-color: rgba(43, 32, 19, 0.04);
   color: var(--ink);
 }
 
@@ -760,8 +760,8 @@ em {
   letter-spacing: -0.06em;
 }
 
-.now div > p,
-.archive div > p {
+.now div > p:not(.eyebrow),
+.archive div > p:not(.eyebrow) {
   max-width: 460px;
   margin: 0;
   color: var(--muted);
@@ -824,7 +824,7 @@ footer {
 }
 
 footer .eyebrow {
-  color: #b9beb7;
+  color: var(--ink-text);
 }
 
 .footer-subtext {
@@ -894,7 +894,7 @@ footer h2 a:hover {
 }
 
 .email-action a {
-  color: #f4f2ed;
+  color: var(--ink-text);
   transition: color 0.2s ease;
 }
 
@@ -918,7 +918,7 @@ footer h2 a:hover {
 .form-toggle-btn:hover {
   border-color: var(--accent);
   color: #fff;
-  background-color: rgba(185, 74, 50, 0.1);
+  background-color: rgba(168, 61, 26, 0.1);
 }
 
 .note-form-wrapper {
@@ -954,14 +954,14 @@ footer h2 a:hover {
 }
 
 .form-group label {
-  color: var(--ink-muted-2);
+  color: var(--ink-muted);
 }
 
 .form-group input,
 .form-group textarea {
   background: var(--ink-input-bg);
   border: 1px solid var(--ink-line);
-  color: #f4f2ed;
+  color: var(--ink-text);
   padding: 9px 12px;
   font-family: var(--font-sans), sans-serif;
   font-size: 14px;
@@ -973,12 +973,12 @@ footer h2 a:hover {
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(185, 74, 50, 0.2);
+  box-shadow: 0 0 0 2px rgba(168, 61, 26, 0.2);
 }
 
 .form-field-error {
-  color: var(--accent);
-  font-size: 10px;
+  color: var(--accent-on-dark);
+  font-size: 11px;
 }
 
 .form-actions {
@@ -1015,7 +1015,7 @@ footer h2 a:hover {
   margin: 65px 0 0;
   padding-top: 17px;
   border-top: 1px solid var(--ink-line);
-  color: var(--ink-muted-2);
+  color: var(--ink-muted);
   font: 10px var(--font-mono), "DM Mono", monospace;
 }
 
@@ -1297,7 +1297,7 @@ footer h2 a:hover {
   .project {
     grid-template-columns: 28px 1fr;
     gap: 10px 13px;
-    padding: 24px 0 30px;
+    padding: 24px 18px 28px 16px;
     min-height: 0;
   }
 

@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "Sanghpal Bhakte",
   title: "Sanghpal Bhakte — Builder's field notes",
   description: "Sanghpal Bhakte — student builder creating practical systems for simpler workflows.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://personal-port-v3.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://sanghpal-portfolio.vercel.app",
   location: "CHH. SAMBHAJINAGAR / INDIA",
   locationCity: "Chhatrapati Sambhajinagar",
   coordinates: "19.8762° N, 75.3433° E",

@@ -32,7 +32,7 @@ const caveat = Caveat({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#f4f2ed",
+  themeColor: "#efe4c9",
   width: "device-width",
   initialScale: 1,
 };
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: siteConfig.title,
     description: siteConfig.description,
   },
