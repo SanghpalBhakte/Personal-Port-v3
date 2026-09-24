@@ -6,7 +6,16 @@ export const alt = siteConfig.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+// Workbench palette (mirrors the :root tokens in app/globals.css)
+const paper = "#efe4c9";
+const ink = "#2b2013";
+const muted = "#655a3f";
+const accent = "#a83d1a";
+const highlight = "#ffd54a";
+
 export default async function OpengraphImage() {
+  const words = siteConfig.tagline.split(" ");
+
   return new ImageResponse(
     (
       <div
@@ -16,8 +25,8 @@ export default async function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#f4f2ed",
-          color: "#202421",
+          background: paper,
+          color: ink,
           padding: "72px",
           fontFamily: "sans-serif",
         }}
@@ -28,29 +37,45 @@ export default async function OpengraphImage() {
             justifyContent: "space-between",
             alignItems: "flex-start",
             fontSize: 22,
-            letterSpacing: -0.5,
-            color: "#626863",
+            letterSpacing: 1,
+            color: muted,
           }}
         >
           <span>{siteConfig.name.toUpperCase()}</span>
           <span>{siteConfig.location}</span>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div
             style={{
               display: "flex",
-              fontSize: 76,
+              flexWrap: "wrap",
+              fontSize: 78,
               fontWeight: 600,
               letterSpacing: -3,
-              lineHeight: 1.05,
-              maxWidth: 980,
+              lineHeight: 1.08,
+              maxWidth: 1000,
             }}
           >
-            {siteConfig.tagline}
+            {words.map((word, i) => (
+              <span
+                key={i}
+                style={{
+                  marginRight: 20,
+                  ...(word === "boring"
+                    ? {
+                        padding: "0 6px",
+                        backgroundImage: `linear-gradient(180deg, transparent 58%, ${highlight} 58%)`,
+                      }
+                    : {}),
+                }}
+              >
+                {word}
+              </span>
+            ))}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div style={{ display: "flex", width: 44, height: 3, background: "#b94a32" }} />
-            <div style={{ display: "flex", fontSize: 22, color: "#626863" }}>
+            <div style={{ display: "flex", width: 44, height: 3, background: accent }} />
+            <div style={{ display: "flex", fontSize: 22, color: muted }}>
               Student builder · AI &amp; Data Science · India
             </div>
           </div>

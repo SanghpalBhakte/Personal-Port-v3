@@ -59,6 +59,15 @@ export const ContactSection: React.FC = () => {
       const result = await res.json();
 
       if (!res.ok) {
+        if (result.code === "delivery_unavailable") {
+          const subject = encodeURIComponent(`Portfolio note from ${formData.name}`);
+          const body = encodeURIComponent(
+            `${formData.message}\n\n— ${formData.name} (${formData.email})`
+          );
+          showToast("Opening your email app so this note actually reaches me.", "info");
+          window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`;
+          return;
+        }
         if (result.errors) {
           setFormErrors(result.errors);
         }

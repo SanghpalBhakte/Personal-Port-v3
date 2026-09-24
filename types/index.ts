@@ -52,6 +52,8 @@ export interface ContactResponse {
   message: string;
   submissionId?: string;
   errors?: Record<string, string[]>;
+  /** Set when the note could not be delivered anywhere durable (no email / no Redis configured). */
+  code?: "delivery_unavailable";
 }
 
 export interface StatsData {

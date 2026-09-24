@@ -74,10 +74,23 @@ export async function POST(req: NextRequest): Promise<NextResponse<ContactRespon
     }
 
     // 5. Persist submission
-    const { id } = await saveContactSubmission({ name, email, message });
+    const { id, storage } = await saveContactSubmission({ name, email, message });
 
-    // 6. Dispatch email notification asynchronously
-    await sendContactNotification({ name, email, message });
+    // 6. Dispatch email notification
+    const delivery = await sendContactNotification({ name, email, message });
+
+    // 7. If the note was neither emailed nor stored durably, it would be lost on the
+    //    next serverless cold start — say so instead of pretending it was sent.
+    if (!delivery.sent && storage === "memory") {
+      return NextResponse.json(
+        {
+          success: false,
+          code: "delivery_unavailable",
+          message: "The note form isn't connected to email yet — opening your email app instead.",
+        },
+        { status: 503 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
