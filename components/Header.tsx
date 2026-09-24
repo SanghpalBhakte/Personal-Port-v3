@@ -6,7 +6,7 @@ export const Header: React.FC = () => {
   return (
     <header className="site-header">
       <Link href="#top" className="wordmark" aria-label="Go to top">
-        SANGHPAL<br />BHÄKTE
+        SANGHPAL<br />BHAKTE
       </Link>
       <nav aria-label="Primary navigation">
         <Link href="#work">Work</Link>

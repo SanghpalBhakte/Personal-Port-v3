@@ -209,8 +209,8 @@ export const ContactSection: React.FC = () => {
       )}
 
       <p className="copyright">
-        © 2026 {siteConfig.name}{" "}
-        <span>Made with patience in {siteConfig.locationCity} · v{siteConfig.version}</span>
+        © 2026 {siteConfig.name} · v{siteConfig.version}{" "}
+        <span>Made with patience in {siteConfig.locationCity}</span>
       </p>
     </footer>
   );

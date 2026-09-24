@@ -33,14 +33,14 @@ export async function sendContactNotification({
         subject: `New Portfolio Message from ${name}`,
         text: `You received a message through your portfolio website:\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
         html: `
-          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #202421; max-width: 560px; margin: 0 auto; padding: 24px; border: 1px solid #c7c7bf; background: #f4f2ed;">
-            <h2 style="margin-top: 0; font-size: 18px; border-bottom: 2px solid #b94a32; padding-bottom: 8px;">New Contact Note</h2>
+          <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #2b2013; max-width: 560px; margin: 0 auto; padding: 24px; border: 1px solid #d8c9a3; background: #efe4c9;">
+            <h2 style="margin-top: 0; font-size: 18px; border-bottom: 2px solid #a83d1a; padding-bottom: 8px;">New Contact Note</h2>
             <p><strong>Name:</strong> ${safeName}</p>
             <p><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
-            <div style="margin-top: 16px; padding: 16px; background: #ffffff; border: 1px solid #e7e6df;">
+            <div style="margin-top: 16px; padding: 16px; background: #fbf6e8; border: 1px solid #d8c9a3;">
               <p style="white-space: pre-wrap; margin: 0;">${safeMessage}</p>
             </div>
-            <p style="margin-top: 24px; font-size: 11px; color: #626863;">Sent from sanghpal-bhakte-portfolio</p>
+            <p style="margin-top: 24px; font-size: 11px; color: #655a3f;">Sent from sanghpal-bhakte-portfolio</p>
           </div>
         `,
       });

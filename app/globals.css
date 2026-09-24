@@ -5,7 +5,6 @@
   --muted: #655a3f;
   --rule: #d8c9a3;
   --accent: #a83d1a;
-  --quiet: #e4d6b0;
   --body-text: #4a3f2c;
   --highlight: #ffd54a;
   --accent-2: #2d4fa3;
@@ -15,7 +14,6 @@
   --ink-line: rgba(241, 231, 206, 0.22);
   --ink-line-soft: rgba(241, 231, 206, 0.14);
   --ink-muted: rgba(241, 231, 206, 0.62);
-  --ink-muted-2: rgba(241, 231, 206, 0.4);
   --ink-text: #f1e7ce;
   --ink-input-bg: rgba(241, 231, 206, 0.06);
 
@@ -309,6 +307,13 @@ em {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.loop-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
 }
 
 .loop-chips .chip.marked {
@@ -1066,10 +1071,17 @@ footer h2 a:hover {
 }
 
 /* Custom Cursor — a pen-nib pointer with a trailing ink stroke, standing in for the system arrow */
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  * {
-    cursor: none !important;
-  }
+/* The system arrow is hidden only while CustomCursor is actually tracking the mouse
+   (it adds .has-custom-cursor on the first mousemove), so a narrow window, a touch
+   device or a failed script can never end up with no cursor at all. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+html.has-custom-cursor input,
+html.has-custom-cursor textarea {
+  cursor: text !important;
 }
 
 .cursor-dot,
@@ -1079,8 +1091,13 @@ footer h2 a:hover {
   left: 0;
   z-index: 9999;
   pointer-events: none;
+  opacity: 0;
   transform: translate(-50%, -50%);
   transition: opacity 0.2s;
+}
+
+.cursor-visible {
+  opacity: 1;
 }
 
 /* The nib — sits exactly on the pointer, no lag, standing in for the arrow */
@@ -1425,8 +1442,8 @@ footer h2 a:hover {
     margin-top: 6px;
   }
 
-  .cursor-dot,
-  .cursor-ring {
-    display: none;
+  /* the next section's top rule already closes the list on small screens */
+  .tool-groups p:last-child {
+    border-bottom: 0;
   }
 }

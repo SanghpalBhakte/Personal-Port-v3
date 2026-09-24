@@ -37,20 +37,28 @@ export const Hero: React.FC = () => {
         <div className="loop-chips">
           <span className="loop-label">The loop</span>
           <span className="chip marked">Research</span>
-          <span>&rarr;</span>
-          <span className="chip">Design</span>
-          <span>&rarr;</span>
-          <span className="chip">Build</span>
-          <span>&rarr;</span>
-          <span className="chip">Test</span>
-          <span>&rarr;</span>
-          <span className="chip marked">Improve</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M4 12a8 8 0 0 1 14-5.3" />
-            <path d="M20 4v4h-4" />
-            <path d="M20 12a8 8 0 0 1-14 5.3" />
-            <path d="M4 20v-4h4" />
-          </svg>
+          <span className="loop-step">
+            <span aria-hidden="true">&rarr;</span>
+            <span className="chip">Design</span>
+          </span>
+          <span className="loop-step">
+            <span aria-hidden="true">&rarr;</span>
+            <span className="chip">Build</span>
+          </span>
+          <span className="loop-step">
+            <span aria-hidden="true">&rarr;</span>
+            <span className="chip">Test</span>
+          </span>
+          <span className="loop-step">
+            <span aria-hidden="true">&rarr;</span>
+            <span className="chip marked">Improve</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M4 12a8 8 0 0 1 14-5.3" />
+              <path d="M20 4v4h-4" />
+              <path d="M20 12a8 8 0 0 1-14 5.3" />
+              <path d="M4 20v-4h4" />
+            </svg>
+          </span>
         </div>
       </div>
     </section>
