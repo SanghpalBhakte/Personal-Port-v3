@@ -76,7 +76,7 @@ export default async function OpengraphImage() {
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
             <div style={{ display: "flex", width: 44, height: 3, background: accent }} />
             <div style={{ display: "flex", fontSize: 22, color: muted }}>
-              Student builder · AI &amp; Data Science · India
+              AI &amp; Data Science student · India
             </div>
           </div>
         </div>

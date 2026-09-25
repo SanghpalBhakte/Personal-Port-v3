@@ -11,7 +11,7 @@ export const Toolbox: React.FC = () => {
     <section className="toolbox section-rule" aria-labelledby="toolbox-title">
       <div className="section-meta">
         <p className="eyebrow">04 / Tools</p>
-        <span className="section-subtext">Technologies, platforms & thinking tools</span>
+        <span className="section-subtext">Languages, platforms and apps</span>
         <h2 id="toolbox-title">What I use.</h2>
       </div>
       <div ref={reveal.ref} className={`tool-groups ${reveal.className}`} style={reveal.style}>

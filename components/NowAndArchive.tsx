@@ -18,7 +18,7 @@ export const NowAndArchive: React.FC = () => {
       >
         <div className="section-meta">
           <p className="eyebrow">05 / Now</p>
-          <span className="section-subtext">Current focus & learning</span>
+          <span className="section-subtext">What I’m up to</span>
         </div>
         <div>
           <h2 id="now-title">
@@ -36,16 +36,16 @@ export const NowAndArchive: React.FC = () => {
         aria-labelledby="archive-title"
       >
         <div className="section-meta">
-          <p className="eyebrow">06 / Earlier experiments</p>
-          <span className="section-subtext">Historical portfolio iterations</span>
+          <p className="eyebrow">06 / Older versions</p>
+          <span className="section-subtext">My older portfolio sites</span>
         </div>
         <div>
           <h2 id="archive-title">
-            The archive is part<br />
-            of the practice.
+            Where I<br />
+            started.
           </h2>
           <p>
-            Older portfolio iterations — useful snapshots of the things I was trying, making, and learning at the time.
+            These are older versions of my portfolio. I’ve kept them up so you can see how my work has changed.
           </p>
           <div className="archive-links">
             {archives.map((archive) => (

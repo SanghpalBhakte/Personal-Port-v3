@@ -24,9 +24,9 @@ export const HowIWork: React.FC = () => {
       <div className="section-heading">
         <div className="section-meta">
           <p className="eyebrow">02 / How I work</p>
-          <span className="section-subtext">Principles & field notes</span>
+          <span className="section-subtext">How I approach projects</span>
         </div>
-        <h2 id="notes-title">Useful beats impressive.</h2>
+        <h2 id="notes-title">What I care about.</h2>
       </div>
       <div className="notes-grid">
         <div ref={manifesto.ref} className={`manifesto-block ${manifesto.className}`} style={manifesto.style}>
@@ -46,7 +46,7 @@ export const HowIWork: React.FC = () => {
             <path d="M4 20v-4h4" />
           </svg>
           <p className="manifesto">
-            I like building the quiet parts: tools that make a busy day easier to understand and a small process easier to keep moving. It&rsquo;s a loop, not a checklist &mdash; I come back to it on every project.
+            I like building small, practical things that make a busy day easier to handle. I rarely get it right the first time, so I keep going back, testing and fixing until it feels right.
           </p>
         </div>
         {notes.map((note, idx) => (

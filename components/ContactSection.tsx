@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { siteConfig } from "@/lib/data";
 import { useToast } from "./Toast";
 
@@ -15,13 +15,15 @@ export const ContactSection: React.FC = () => {
     _gotcha: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // When the form was opened. Bots submit instantly; people take a few seconds.
+  const openedAt = useRef(0);
   const [formErrors, setFormErrors] = useState<Record<string, string[]>>({});
 
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(siteConfig.contactEmail);
       setCopyStatus("Copied");
-      showToast("Email address copied to clipboard.", "success");
+      showToast("Email copied.", "success");
     } catch {
       setCopyStatus(`Email: ${siteConfig.contactEmail}`);
     }
@@ -53,7 +55,7 @@ export const ContactSection: React.FC = () => {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, _elapsed: Date.now() - openedAt.current }),
       });
 
       const result = await res.json();
@@ -62,23 +64,23 @@ export const ContactSection: React.FC = () => {
         if (result.code === "delivery_unavailable") {
           const subject = encodeURIComponent(`Portfolio note from ${formData.name}`);
           const body = encodeURIComponent(
-            `${formData.message}\n\n— ${formData.name} (${formData.email})`
+            `${formData.message}\n\nFrom ${formData.name} (${formData.email})`
           );
-          showToast("Opening your email app so this note actually reaches me.", "info");
+          showToast("The form isn’t working right now, so I’m opening your email app instead.", "info");
           window.location.href = `mailto:${siteConfig.contactEmail}?subject=${subject}&body=${body}`;
           return;
         }
         if (result.errors) {
           setFormErrors(result.errors);
         }
-        showToast(result.message || "Failed to send message.", "error");
+        showToast(result.message || "Couldn’t send that. Please try again or email me directly.", "error");
       } else {
-        showToast(result.message || "Message sent successfully.", "success");
+        showToast(result.message || "Sent! I’ll get back to you soon.", "success");
         setFormData({ name: "", email: "", message: "", _gotcha: "" });
         setIsFormOpen(false);
       }
     } catch {
-      showToast("Network error. Please try again or email directly.", "error");
+      showToast("Couldn’t send that. Check your connection or email me directly.", "error");
     } finally {
       setIsSubmitting(false);
     }
@@ -88,12 +90,12 @@ export const ContactSection: React.FC = () => {
     <footer id="contact">
       <div className="footer-top">
         <p className="eyebrow">07 / Contact</p>
-        <span className="footer-subtext">Direct lines & public presence</span>
+        <span className="footer-subtext">Where you can find me</span>
       </div>
 
       <h2>
-        Elsewhere on<br />
-        the <a href={`mailto:${siteConfig.contactEmail}`}>internet.</a>
+        Let&rsquo;s talk.<br />
+        <a href={`mailto:${siteConfig.contactEmail}`}>Email me.</a>
       </h2>
 
       <div className="footer-links">
@@ -123,7 +125,10 @@ export const ContactSection: React.FC = () => {
         <button
           type="button"
           className="form-toggle-btn"
-          onClick={() => setIsFormOpen(!isFormOpen)}
+          onClick={() => {
+            if (!isFormOpen) openedAt.current = Date.now();
+            setIsFormOpen(!isFormOpen);
+          }}
           style={{ marginLeft: "auto" }}
         >
           {isFormOpen ? "Close note form ↑" : "Send a quick note ↓"}
@@ -188,7 +193,7 @@ export const ContactSection: React.FC = () => {
                 rows={4}
                 value={formData.message}
                 onChange={handleInputChange}
-                placeholder="What are you working on or thinking about?"
+                placeholder="What’s on your mind?"
               />
               {formErrors.message && (
                 <span className="form-field-error">{formErrors.message[0]}</span>
@@ -210,7 +215,7 @@ export const ContactSection: React.FC = () => {
 
       <p className="copyright">
         © 2026 {siteConfig.name} · v{siteConfig.version}{" "}
-        <span>Made with patience in {siteConfig.locationCity}</span>
+        <span>Made in {siteConfig.locationCity}</span>
       </p>
     </footer>
   );

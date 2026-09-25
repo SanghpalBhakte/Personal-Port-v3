@@ -46,12 +46,12 @@ export const metadata: Metadata = {
   creator: siteConfig.name,
   keywords: [
     "Sanghpal Bhakte",
-    "Builder",
-    "AI & Data Science Student",
+    "AI & Data Science student",
     "Clarity Desk",
+    "Scheme Setu",
     "Smart India Hackathon",
-    "Full Stack Developer",
-    "Product Design",
+    "Web developer",
+    "Graphic design",
     "Next.js",
   ],
   openGraph: {
@@ -85,7 +85,7 @@ export default function RootLayout({
     "@type": "Person",
     name: siteConfig.name,
     url: siteConfig.url,
-    jobTitle: "Student & Builder",
+    jobTitle: "AI & Data Science student",
     description: siteConfig.description,
     address: {
       "@type": "PostalAddress",

@@ -30,7 +30,7 @@ export interface VisualWorkItem {
   description: string;
   url: string;
   ctaText: string;
-  /** Verified Behance CDN cover image URL. Leave "" if not independently verified — never guess one. */
+  /** Verified Behance CDN cover image URL. Leave "" if not independently verified. Never guess one. */
   thumbnail: string;
 }
 

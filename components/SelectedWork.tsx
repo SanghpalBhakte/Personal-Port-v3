@@ -127,7 +127,7 @@ export const SelectedWork: React.FC = () => {
       <div className="section-heading">
         <div className="section-meta">
           <p className="eyebrow">01 / Selected work</p>
-          <span className="section-subtext">Projects & systems in progress</span>
+          <span className="section-subtext">Things I’m building</span>
         </div>
         <h2 id="work-title">
           A few things<br />

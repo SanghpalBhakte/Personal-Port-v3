@@ -35,7 +35,7 @@ export const Hero: React.FC = () => {
 
       <div className="identity-strip">
         <div className="loop-chips">
-          <span className="loop-label">The loop</span>
+          <span className="loop-label">My process</span>
           <span className="chip marked">Research</span>
           <span className="loop-step">
             <span aria-hidden="true">&rarr;</span>
