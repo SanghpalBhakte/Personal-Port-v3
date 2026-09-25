@@ -9,6 +9,11 @@ export interface Project {
   tags: string[];
   link?: string;
   linkText?: string;
+  /** Screenshot in /public/projects, captured from the live app. */
+  image?: string;
+  imageAlt?: string;
+  /** Internal case-study route, e.g. /work/scheme-setu */
+  caseStudy?: string;
 }
 
 export interface NoteItem {
@@ -56,12 +61,6 @@ export interface ContactResponse {
   code?: "delivery_unavailable";
 }
 
-export interface StatsData {
-  totalViews: number;
-  projectLikes: Record<string, number>;
-  storage: "redis" | "memory";
-}
-
 export interface HealthResponse {
   status: "ok" | "degraded" | "error";
   uptime: number;
@@ -72,10 +71,4 @@ export interface HealthResponse {
     redis: boolean;
     resend: boolean;
   };
-}
-
-export interface ApiResponse<T = unknown> {
-  success: boolean;
-  data?: T;
-  error?: string;
 }

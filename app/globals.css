@@ -531,6 +531,201 @@ em {
   transform: translate(2px, -2px);
 }
 
+/* Screenshot of the live app, taped onto the card like a photo */
+.project-shot {
+  position: relative;
+  display: block;
+  max-width: 440px;
+  margin-top: 26px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid rgba(43, 32, 19, 0.14);
+  border-radius: 2px;
+  box-shadow: 0 6px 16px rgba(43, 32, 19, 0.12);
+  transform: rotate(-0.8deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-shot::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  z-index: 1;
+  width: 64px;
+  height: 16px;
+  margin-left: -32px;
+  background: rgba(216, 201, 163, 0.85);
+  border: 1px solid rgba(43, 32, 19, 0.12);
+  transform: rotate(2deg);
+}
+
+.project-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.project:hover .project-shot,
+.project-shot:hover {
+  transform: rotate(0deg);
+  box-shadow: 0 10px 22px rgba(43, 32, 19, 0.16);
+}
+
+/* Case study pages */
+.case {
+  padding-bottom: 32px;
+}
+
+.case-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  padding: 8px 0;
+  font: 11px var(--font-mono), "DM Mono", monospace;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.case-back:hover {
+  color: var(--accent);
+}
+
+.case-hero {
+  padding: 36px 0 72px;
+}
+
+.case-hero h1 {
+  margin: 18px 0 0;
+}
+
+.case-lede {
+  max-width: 640px;
+  margin: 28px 0 0;
+  font-size: 22px;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--body-text);
+}
+
+.case-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 860px;
+  margin: 40px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+}
+
+.case-facts dt {
+  font: 10px var(--font-mono), "DM Mono", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.case-facts dd {
+  margin: 6px 0 0;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.case-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  padding: 11px 18px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  color: #fff;
+  font: 11px var(--font-mono), "DM Mono", monospace;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.case-cta:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.case-shot {
+  max-width: 860px;
+  margin-top: 56px;
+  transform: rotate(-0.4deg);
+}
+
+.case-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 8%;
+  padding: 64px 0;
+}
+
+.case-section h2 {
+  margin: 0 0 20px;
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.case-section p:not(.eyebrow) {
+  max-width: 600px;
+  margin: 0 0 14px;
+  color: var(--body-text);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.case-list {
+  max-width: 640px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.case-list li {
+  padding: 16px 0;
+  border-top: 1px solid var(--rule);
+  color: var(--body-text);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.case-list li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.case-list b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.case-section .case-note {
+  margin-top: 24px;
+  font: 12px/1.6 var(--font-mono), "DM Mono", monospace;
+  color: var(--muted);
+}
+
+.case-end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  padding: 56px 0 24px;
+}
+
+.case-end .case-cta,
+.case-end .case-back {
+  margin-top: 0;
+}
+
 /* Notes / How I Work */
 .notes,
 .gfx {
@@ -1445,5 +1640,32 @@ html.has-custom-cursor textarea {
   /* the next section's top rule already closes the list on small screens */
   .tool-groups p:last-child {
     border-bottom: 0;
+  }
+
+  .project-shot {
+    margin-top: 20px;
+  }
+
+  .case-hero {
+    padding: 24px 0 48px;
+  }
+
+  .case-lede {
+    font-size: 18px;
+  }
+
+  .case-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 20px;
+  }
+
+  .case-shot {
+    margin-top: 40px;
+  }
+
+  .case-section {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 44px 0;
   }
 }
