@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Hovering these turns the trailing stroke into an "underline".
 const INTERACTIVE = "a, button, .project, .gfx-display, [role='button']";
@@ -12,6 +13,12 @@ export const CustomCursor = () => {
   const ringRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
+
+  // A new page loaded under a still mouse: drop the hover "underline" until it moves again.
+  useEffect(() => {
+    setIsActive(false);
+  }, [pathname]);
 
   useEffect(() => {
     // Only for a mouse/trackpad, and never when the visitor asked for less motion.

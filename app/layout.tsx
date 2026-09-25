@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/lib/data";
 import { ToastProvider } from "@/components/Toast";
 import { CustomCursor } from "@/components/CustomCursor";
+import { Analytics } from "@vercel/analytics/next";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -112,6 +113,7 @@ export default function RootLayout({
           {children}
           <CustomCursor />
         </ToastProvider>
+        <Analytics />
       </body>
     </html>
   );

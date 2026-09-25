@@ -35,6 +35,8 @@ export const projects: Project[] = [
     tags: ["Vanilla JavaScript", "Firebase", "PWA"],
     link: "https://campusos-83365.web.app/#dashboard",
     linkText: "View live",
+    image: "/projects/clarity-desk.webp",
+    imageAlt: "Clarity Desk's Today view: timetable, tasks and attendance cards in a calm sidebar layout",
   },
   {
     id: "scheme-matching",
@@ -46,6 +48,9 @@ export const projects: Project[] = [
     tags: ["AI & ML", "Research", "Product lead"],
     link: "https://sih-ai-scheme-matcher-v2.vercel.app/",
     linkText: "View live",
+    image: "/projects/scheme-setu.webp",
+    imageAlt: "Scheme Setu homepage: find the government schemes you're actually eligible for",
+    caseStudy: "/work/scheme-setu",
   },
   {
     id: "sweep",
@@ -57,6 +62,8 @@ export const projects: Project[] = [
     tags: ["Product design", "Dashboard UX"],
     link: "https://sift-sand.vercel.app/",
     linkText: "View live",
+    image: "/projects/sweep.webp",
+    imageAlt: "Sweep's overview screen for keeping recurring subscriptions in one clear view",
   },
   {
     id: "rivet",
@@ -66,7 +73,7 @@ export const projects: Project[] = [
     description: "A small system for keeping track of follow-ups, work status, and the everyday details that keep a service team moving.",
     status: "IN DEVELOPMENT /\nPROTOTYPE",
     tags: ["Operations design", "Internal tools"],
-    linkText: "Link coming soon.",
+    linkText: "Work in progress",
   },
   {
     id: "janai-tours",
@@ -76,7 +83,7 @@ export const projects: Project[] = [
     description: "A website and a few workflow ideas for a travel agency. Still taking shape around clearer enquiries and planning.",
     status: "IN\nDEVELOPMENT",
     tags: ["Website", "Workflow exploration"],
-    linkText: "Link coming soon.",
+    linkText: "Private prototype",
   },
 ];
 

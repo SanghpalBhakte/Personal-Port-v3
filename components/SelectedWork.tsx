@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { projects } from "@/lib/data";
 import { useReveal } from "@/lib/useReveal";
 import type { Project } from "@/types";
@@ -69,6 +71,23 @@ const ProjectCard: React.FC<{ project: Project; idx: number }> = ({ project, idx
         </h3>
         <p>{project.description}</p>
         {project.note && <p className="project-note">{project.note}</p>}
+        {project.image && project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            className="project-shot"
+            tabIndex={-1}
+          >
+            <Image
+              src={project.image}
+              alt={project.imageAlt ?? ""}
+              width={1280}
+              height={800}
+              sizes="(max-width: 900px) 90vw, 440px"
+            />
+          </a>
+        )}
       </div>
       <div className="project-side">
         <b>{project.status}</b>
@@ -88,6 +107,14 @@ const ProjectCard: React.FC<{ project: Project; idx: number }> = ({ project, idx
           </a>
         ) : (
           project.linkText && <p className="project-note">{project.linkText}</p>
+        )}
+        {project.caseStudy && (
+          <Link href={project.caseStudy} className="project-link">
+            <span>Read the case study</span>
+            <span className="project-link-arrow" aria-hidden="true">
+              →
+            </span>
+          </Link>
         )}
       </div>
     </article>
