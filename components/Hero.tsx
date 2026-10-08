@@ -26,11 +26,11 @@ export const Hero: React.FC = () => {
       <div className="hero-foot">
         <div className="hero-bio-block">
           <p>{siteConfig.bio}</p>
+          <Link className="arrow-link" href="#work">
+            <span>See what I’m working on</span>
+            <span className="arrow-glyph" aria-hidden="true">↓</span>
+          </Link>
         </div>
-        <Link className="arrow-link" href="#work">
-          <span>See what I’m working on</span>
-          <span className="arrow-glyph" aria-hidden="true">↓</span>
-        </Link>
       </div>
 
       <div className="identity-strip">

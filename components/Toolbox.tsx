@@ -12,14 +12,16 @@ export const Toolbox: React.FC = () => {
       <div className="section-meta">
         <p className="eyebrow">04 / Tools</p>
         <span className="section-subtext">Languages, platforms and apps</span>
-        <h2 id="toolbox-title">What I use.</h2>
       </div>
-      <div ref={reveal.ref} className={`tool-groups ${reveal.className}`} style={reveal.style}>
-        {toolGroups.map((group) => (
-          <p key={group.category}>
-            <b>{group.category}</b> {group.items}
-          </p>
-        ))}
+      <div>
+        <h2 id="toolbox-title">What I use.</h2>
+        <div ref={reveal.ref} className={`tool-groups ${reveal.className}`} style={reveal.style}>
+          {toolGroups.map((group) => (
+            <p key={group.category}>
+              <b>{group.category}</b> {group.items}
+            </p>
+          ))}
+        </div>
       </div>
     </section>
   );

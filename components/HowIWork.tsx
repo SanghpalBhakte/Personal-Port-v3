@@ -49,9 +49,11 @@ export const HowIWork: React.FC = () => {
             I like building small, practical things that make a busy day easier to handle. I rarely get it right the first time, so I keep going back, testing and fixing until it feels right.
           </p>
         </div>
-        {notes.map((note, idx) => (
-          <Note key={note.number} note={note} idx={idx} />
-        ))}
+        <div className="notes-list">
+          {notes.map((note, idx) => (
+            <Note key={note.number} note={note} idx={idx} />
+          ))}
+        </div>
       </div>
     </section>
   );

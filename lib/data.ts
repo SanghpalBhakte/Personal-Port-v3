@@ -41,9 +41,9 @@ export const projects: Project[] = [
   {
     id: "scheme-matching",
     number: "02",
-    kind: "Scheme matching app · Smart India Hackathon",
+    kind: "Scheme matching app",
     title: "Scheme\nSetu",
-    description: "A web app that helps first-time and marginalised entrepreneurs find government schemes they qualify for, and shows why each one matches. We built it as a team of six for Smart India Hackathon. I led research, product and the matching approach.",
+    description: "A web app that helps first-time and marginalised entrepreneurs find government schemes they qualify for, and shows why each one matches. I led research, product and the matching approach.",
     status: "SMART INDIA HACKATHON /\nTEAM OF 6",
     tags: ["Research", "Product lead", "Rule-based matching"],
     link: "https://sih-ai-scheme-matcher-v2.vercel.app/",

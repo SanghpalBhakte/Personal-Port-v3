@@ -129,7 +129,6 @@ export const ContactSection: React.FC = () => {
             if (!isFormOpen) openedAt.current = Date.now();
             setIsFormOpen(!isFormOpen);
           }}
-          style={{ marginLeft: "auto" }}
         >
           {isFormOpen ? "Close note form ↑" : "Send a quick note ↓"}
         </button>

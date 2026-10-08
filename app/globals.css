@@ -10,6 +10,10 @@
   --accent-2: #2d4fa3;
   --card-surface: #fbf6e8;
 
+  /* Spacing + type floor, so every section follows one rhythm */
+  --space-section: 80px;
+  --space-heading: 56px;
+
   /* Dark surface (footer) — light-on-dark variants of the same palette */
   --ink-line: rgba(241, 231, 206, 0.22);
   --ink-line-soft: rgba(241, 231, 206, 0.14);
@@ -92,10 +96,11 @@ footer {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   border-bottom: 1px solid var(--rule);
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
 }
 
 .wordmark {
+  position: relative;
   text-decoration: none;
   font: 500 13px/0.95 var(--font-mono), "DM Mono", monospace;
   letter-spacing: -0.04em;
@@ -170,7 +175,7 @@ nav a:hover::after {
 }
 
 .hero-submeta {
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
   letter-spacing: 0.02em;
 }
@@ -178,7 +183,7 @@ nav a:hover::after {
 .eyebrow,
 .project-kind {
   margin: 0;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--muted);
@@ -228,7 +233,7 @@ p {
 
 h1 {
   max-width: 1040px;
-  margin: 96px 0 0;
+  margin: 72px 0 40px;
   font-size: clamp(52px, 7.1vw, 96px);
   font-weight: 500;
   letter-spacing: -0.055em;
@@ -243,40 +248,50 @@ em {
 
 .hero-foot {
   margin-top: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: end;
+  display: block;
   border-top: 1px solid var(--ink);
   padding-top: 24px;
 }
 
 .hero-foot p {
-  max-width: 460px;
-  margin: 0;
+  max-width: 520px;
+  margin: 0 0 14px;
   font-size: 17px;
   line-height: 1.55;
   color: var(--body-text);
 }
 
 .arrow-link {
-  justify-self: end;
+  position: relative;
   text-decoration: none;
-  font: 11px var(--font-mono), "DM Mono", monospace;
-  color: var(--muted);
+  font: 13px var(--font-mono), "DM Mono", monospace;
+  color: var(--ink);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 0;
+  padding: 10px 0 4px;
+  border-bottom: 1px solid var(--ink);
   transition: color 0.2s ease;
 }
 
+/* Invisible 44px touch area, the look stays the same */
+.arrow-link::before,
+.wordmark::before,
+nav a::before,
+.footer-links a::before {
+  content: "";
+  position: absolute;
+  inset: -10px -8px;
+}
+
 .arrow-glyph {
-  font-size: 18px;
+  font-size: 16px;
   transition: transform 0.2s ease;
 }
 
 .arrow-link:hover {
   color: var(--accent);
+  border-color: var(--accent);
 }
 
 .arrow-link:hover .arrow-glyph {
@@ -303,7 +318,7 @@ em {
   align-items: center;
   flex-wrap: wrap;
   gap: 9px;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--muted);
@@ -334,7 +349,7 @@ em {
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: flex-start;
-  margin-bottom: 64px;
+  margin-bottom: var(--space-heading);
 }
 
 .section-meta {
@@ -344,10 +359,10 @@ em {
 }
 
 .section-subtext {
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
   letter-spacing: 0.01em;
-  max-width: 220px;
+  max-width: 240px;
 }
 
 .section-heading h2 {
@@ -360,19 +375,18 @@ em {
 
 /* Selected Work */
 .work {
-  padding-top: 56px;
+  padding-top: var(--space-section);
+  padding-bottom: var(--space-section);
 }
 
 .project {
   position: relative;
   display: grid;
-  grid-template-columns: 52px 1.05fr 2.15fr 1.25fr;
-  gap: 25px;
-  padding: 32px 24px 36px 20px;
+  /* Same one-third line as the section headings, so the title lines up with them */
+  grid-template-columns: 1fr 0.95fr 1.05fr;
   margin-top: 22px;
   background: var(--card-surface);
   border: 1px solid rgba(43, 32, 19, 0.14);
-  min-height: 235px;
   border-radius: 3px;
   box-shadow: 0 4px 12px rgba(43, 32, 19, 0.06);
   transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
@@ -401,12 +415,20 @@ em {
   transform: translateY(-2px);
 }
 
-.project-number {
+/* Left rail: what it is and where it stands, grouped together */
+.project-rail {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 14px;
+  padding: 34px 24px 32px 22px;
+}
+
+.project-number {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
   transition: color 0.2s ease;
 }
@@ -425,14 +447,26 @@ em {
 }
 
 .project-kind {
-  padding-top: 2px;
-  max-width: 150px;
-  font-size: 10px;
+  max-width: 240px;
+}
+
+.project-status {
+  margin: 0;
+  max-width: 240px;
+  text-wrap: balance;
+  font: 500 12px/1.45 var(--font-mono), "DM Mono", monospace;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+/* Middle: the words, then the tags and links that belong to them */
+.project-copy {
+  padding: 32px 28px 36px 0;
 }
 
 .project h3 {
-  margin: 0 0 19px;
-  font-size: clamp(39px, 4.5vw, 62px);
+  margin: 0 0 18px;
+  font-size: clamp(38px, 4vw, 56px);
   line-height: 1.05;
   letter-spacing: -0.06em;
   font-weight: 500;
@@ -446,14 +480,14 @@ em {
 .featured-label {
   display: block;
   margin-bottom: 10px;
-  font: 10px var(--font-mono), "DM Mono", monospace;
-  letter-spacing: 0.08em;
+  font: 12px var(--font-mono), "DM Mono", monospace;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
 }
 
 .project.featured h3 {
-  font-size: clamp(46px, 5.2vw, 74px);
+  font-size: clamp(44px, 4.8vw, 66px);
 }
 
 .project-copy > p:not(.project-note) {
@@ -464,31 +498,31 @@ em {
   line-height: 1.58;
 }
 
-.project-side {
+.project-actions {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 6px;
+  margin-top: 22px;
 }
 
-.project-side > b {
-  font: 10px/1.35 var(--font-mono), "DM Mono", monospace;
-  font-weight: 500;
-  color: var(--accent);
-  letter-spacing: 0.02em;
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: auto;
 }
 
 .tag-badge {
   border: 1px solid var(--rule);
   border-radius: 100px;
-  padding: 4px 9px;
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  padding: 5px 10px;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
   line-height: 1;
   background: transparent;
@@ -502,20 +536,24 @@ em {
 }
 
 .project-note {
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   color: var(--muted);
-  font: 11px/1.5 var(--font-mono), "DM Mono", monospace;
+  font: 12px/1.5 var(--font-mono), "DM Mono", monospace;
+}
+
+.project-links .project-note {
+  margin: 0;
+  padding: 8px 0 0;
 }
 
 .project-link {
-  margin-top: 6px;
-  padding: 8px 0;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
   text-decoration: none;
-  color: var(--muted);
-  font: 11px/1.5 var(--font-mono), "DM Mono", monospace;
+  color: var(--ink);
+  font: 13px/1.5 var(--font-mono), "DM Mono", monospace;
   transition: color 0.2s ease;
 }
 
@@ -535,8 +573,9 @@ em {
 .project-shot {
   position: relative;
   display: block;
+  align-self: start;
   max-width: 440px;
-  margin-top: 26px;
+  margin: 40px 26px 36px 0;
   padding: 6px;
   background: #fff;
   border: 1px solid rgba(43, 32, 19, 0.14);
@@ -583,7 +622,7 @@ em {
   gap: 6px;
   margin-top: 28px;
   padding: 8px 0;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
   text-decoration: none;
   transition: color 0.2s ease;
@@ -729,24 +768,31 @@ em {
 /* Notes / How I Work */
 .notes,
 .gfx {
-  padding: 92px 0;
+  padding: var(--space-section) 0;
 }
 
 .notes .section-heading,
 .gfx .section-heading {
-  margin-bottom: 58px;
+  margin-bottom: var(--space-heading);
 }
 
 .notes-grid {
   display: grid;
-  grid-template-columns: 1.55fr repeat(3, 1fr);
-  gap: 30px;
+  grid-template-columns: 1fr 2fr;
+  gap: 0;
 }
 
 .manifesto-block {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  padding-right: 48px;
+}
+
+.notes-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 
 .loop-mark {
@@ -757,7 +803,7 @@ em {
 }
 
 .manifesto {
-  max-width: 455px;
+  max-width: 380px;
   margin: 0;
   font-size: 29px;
   line-height: 1.22;
@@ -776,7 +822,7 @@ em {
 }
 
 .note span {
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--accent);
   font-weight: 500;
 }
@@ -790,14 +836,14 @@ em {
 
 .note p {
   margin: 0;
-  color: var(--muted);
-  font-size: 14px;
+  color: var(--body-text);
+  font-size: 15px;
   line-height: 1.58;
 }
 
 /* Visual Work */
 .gfx {
-  padding-bottom: 86px;
+  padding-bottom: var(--space-section);
 }
 
 .gfx-layout {
@@ -865,7 +911,7 @@ em {
 
 .gfx-display h3 {
   margin: 14px 0 9px;
-  font-size: clamp(28px, 2.6vw, 36px);
+  font-size: clamp(26px, 2.2vw, 31px);
   letter-spacing: -0.045em;
   font-weight: 500;
   line-height: 1.2;
@@ -879,7 +925,7 @@ em {
 .gfx-display p:not(.eyebrow) {
   max-width: 430px;
   margin: 0;
-  color: var(--muted);
+  color: var(--body-text);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -888,7 +934,7 @@ em {
   display: block;
   margin-top: auto;
   padding-top: 24px;
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--accent);
   letter-spacing: 0.04em;
   transition: transform 0.2s ease;
@@ -902,13 +948,13 @@ em {
 .toolbox {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 8%;
-  padding: 75px 0;
+  gap: 0;
+  padding: var(--space-section) 0;
 }
 
 .toolbox h2 {
-  margin: 12px 0 0;
-  font-size: clamp(34px, 4vw, 54px);
+  margin: 0 0 32px;
+  font-size: clamp(34px, 4.3vw, 58px);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.055em;
@@ -918,7 +964,7 @@ em {
   margin: 0;
   padding: 18px 0 19px;
   border-top: 1px solid var(--rule);
-  color: var(--muted);
+  color: var(--body-text);
   font-size: 16px;
   line-height: 1.55;
   transition: background-color 0.2s ease;
@@ -937,7 +983,7 @@ em {
   display: block;
   margin-bottom: 5px;
   color: var(--ink);
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -947,8 +993,8 @@ em {
 .archive {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 8%;
-  padding: 86px 0;
+  gap: 0;
+  padding: var(--space-section) 0;
 }
 
 .now h2,
@@ -964,13 +1010,13 @@ em {
 .archive div > p:not(.eyebrow) {
   max-width: 460px;
   margin: 0;
-  color: var(--muted);
+  color: var(--body-text);
   font-size: 17px;
   line-height: 1.58;
 }
 
 .archive {
-  padding: 70px 0;
+  padding: var(--space-section) 0;
 }
 
 .archive-links {
@@ -984,10 +1030,11 @@ em {
   align-items: center;
   justify-content: space-between;
   width: 240px;
-  padding: 10px 4px 6px 0;
+  min-height: 44px;
+  padding: 12px 4px 12px 0;
   border-top: 1px solid var(--ink);
   text-decoration: none;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 13px var(--font-mono), "DM Mono", monospace;
   color: var(--muted);
   transition: color 0.2s ease, border-color 0.2s ease, padding-left 0.2s ease;
 }
@@ -1028,13 +1075,13 @@ footer .eyebrow {
 }
 
 .footer-subtext {
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   color: var(--ink-muted);
   letter-spacing: 0.02em;
 }
 
 footer h2 {
-  margin: 72px 0 56px;
+  margin: 72px 0 48px;
   font-size: clamp(52px, 7vw, 94px);
   font-weight: 500;
   line-height: 1.05;
@@ -1055,7 +1102,7 @@ footer h2 a:hover {
 .footer-links {
   display: flex;
   gap: 28px;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 13px var(--font-mono), "DM Mono", monospace;
 }
 
 .footer-links a {
@@ -1065,13 +1112,14 @@ footer h2 a:hover {
   text-decoration: none;
   color: var(--ink-text);
   border-bottom: 1px solid var(--ink-line-soft);
+  position: relative;
   padding: 8px 0 4px;
   margin-top: -8px;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .link-arrow {
-  font-size: 10px;
+  font-size: 12px;
   transition: transform 0.2s ease;
 }
 
@@ -1087,14 +1135,16 @@ footer h2 a:hover {
 .email-action {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 8px 14px;
+  flex-wrap: wrap;
   margin-top: 32px;
   color: var(--ink-text);
-  font: 12px var(--font-mono), "DM Mono", monospace;
+  font: 14px var(--font-mono), "DM Mono", monospace;
 }
 
 .email-action a {
   color: var(--ink-text);
+  padding: 14px 0;
   transition: color 0.2s ease;
 }
 
@@ -1107,11 +1157,25 @@ footer h2 a:hover {
   border: 1px solid var(--ink-line-soft);
   background: transparent;
   color: var(--ink-text);
-  padding: 6px 10px;
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  min-height: 40px;
+  padding: 8px 14px;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   cursor: pointer;
   border-radius: 2px;
   transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+/* The one thing a visitor can do next gets the accent */
+.email-action .form-toggle-btn {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.email-action .form-toggle-btn:hover {
+  background: #8f3215;
+  border-color: #8f3215;
+  color: #fff;
 }
 
 .email-action button:hover,
@@ -1144,7 +1208,7 @@ footer h2 a:hover {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
 }
 
 .form-group {
@@ -1178,7 +1242,7 @@ footer h2 a:hover {
 
 .form-field-error {
   color: var(--accent-on-dark);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .form-actions {
@@ -1193,7 +1257,7 @@ footer h2 a:hover {
   border: 1px solid var(--accent);
   color: #fff;
   padding: 8px 16px;
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   cursor: pointer;
   border-radius: 2px;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -1216,7 +1280,7 @@ footer h2 a:hover {
   padding-top: 17px;
   border-top: 1px solid var(--ink-line);
   color: var(--ink-muted);
-  font: 10px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
 }
 
 /* Toast Container & Notification */
@@ -1233,7 +1297,7 @@ footer h2 a:hover {
 
 .toast-item {
   padding: 9px 16px;
-  font: 11px var(--font-mono), "DM Mono", monospace;
+  font: 12px var(--font-mono), "DM Mono", monospace;
   background: var(--ink);
   color: var(--paper);
   border: 1px solid var(--muted);
@@ -1417,18 +1481,27 @@ html.has-custom-cursor textarea {
   }
 
   .project {
-    grid-template-columns: 44px 0.9fr 1.7fr 1fr;
-    gap: 18px;
+    grid-template-columns: 1fr 2fr;
   }
 
-  .notes-grid {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 32px;
+  .project-rail {
+    grid-row: 1 / span 2;
+  }
+
+  .project-shot {
+    grid-column: 2;
+    margin: 0 28px 36px 0;
+    max-width: 400px;
+  }
+
+  .notes-list {
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
 
   .manifesto {
-    grid-column: 1 / -1;
-    max-width: 620px;
+    max-width: 300px;
+    font-size: 26px;
   }
 }
 
@@ -1473,19 +1546,17 @@ html.has-custom-cursor textarea {
   }
 
   .hero-foot {
-    display: block;
     padding-top: 18px;
   }
 
   .hero-foot p {
-    margin-bottom: 24px;
+    margin-bottom: 14px;
     font-size: 16px;
     line-height: 1.55;
   }
 
-  .arrow-link {
-    display: flex;
-    justify-content: flex-start;
+  h1 {
+    margin-bottom: 44px;
   }
 
   .identity-strip {
@@ -1495,7 +1566,7 @@ html.has-custom-cursor textarea {
 
   .section-heading {
     display: block;
-    margin-bottom: 40px;
+    margin-bottom: var(--space-heading);
   }
 
   .section-heading h2 {
@@ -1503,14 +1574,36 @@ html.has-custom-cursor textarea {
   }
 
   .work {
-    padding-top: 32px;
+    padding-top: var(--space-section);
+    padding-bottom: var(--space-section);
   }
 
   .project {
-    grid-template-columns: 28px 1fr;
-    gap: 10px 13px;
-    padding: 24px 18px 28px 16px;
-    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 26px 20px 8px;
+  }
+
+  /* The copy block dissolves so the photo can sit right after the description */
+  .project-copy {
+    display: contents;
+  }
+
+  .project-rail {
+    order: 1;
+    padding: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 8px 14px;
+  }
+
+  .project-status {
+    grid-column: 1 / -1;
+  }
+
+  .project-number {
+    gap: 10px;
   }
 
   .project-mark {
@@ -1518,56 +1611,48 @@ html.has-custom-cursor textarea {
   }
 
   .project-kind,
-  .project-copy,
-  .project-side {
-    grid-column: 2;
-  }
-
-  .project-kind {
+  .project-status {
     max-width: none;
   }
 
-  .project-copy {
-    display: block;
-  }
+  .featured-label { order: 2; margin: 16px 0 6px; }
+  .project h3 { order: 3; margin: 14px 0 14px; font-size: 46px; line-height: 1.05; }
+  .project-copy > p:not(.project-note) { order: 4; font-size: 15.5px; }
+  .project-note { order: 5; }
+  .project-shot { order: 6; align-self: stretch; margin: 22px 4px 0; max-width: none; grid-column: auto; }
+  .project-actions { order: 7; margin-top: 18px; padding-bottom: 4px; }
+  .project h3 + p { margin-top: 0; }
 
-  .project h3 {
-    margin: 10px 0 15px;
-    font-size: 46px;
-    line-height: 1.05;
-  }
+  .project-links { gap: 0 22px; }
 
-  .project-copy > p:not(.project-note) {
-    font-size: 15px;
-  }
-
-  .project-side {
-    display: block;
-    margin-top: 8px;
-  }
-
-  .project-side > b {
-    display: block;
-  }
-
-  .tags {
-    margin-top: 14px;
+  :root {
+    --space-section: 56px;
+    --space-heading: 32px;
   }
 
   .notes,
   .gfx {
-    padding: 64px 0;
+    padding: var(--space-section) 0;
   }
 
   .notes .section-heading,
   .gfx .section-heading {
-    margin-bottom: 38px;
+    margin-bottom: var(--space-heading);
   }
 
   .notes-grid,
+  .notes-list,
   .gfx-layout {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .manifesto-block {
+    padding-right: 0;
+  }
+
+  .manifesto {
+    max-width: none;
   }
 
   .manifesto {
@@ -1581,15 +1666,15 @@ html.has-custom-cursor textarea {
 
   .toolbox {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 60px 0;
+    gap: 24px;
+    padding: var(--space-section) 0;
   }
 
   .now,
   .archive {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 60px 0;
+    gap: 24px;
+    padding: var(--space-section) 0;
   }
 
   .now h2,
@@ -1642,10 +1727,6 @@ html.has-custom-cursor textarea {
     border-bottom: 0;
   }
 
-  .project-shot {
-    margin-top: 20px;
-  }
-
   .case-hero {
     padding: 24px 0 48px;
   }
@@ -1667,5 +1748,23 @@ html.has-custom-cursor textarea {
     grid-template-columns: 1fr;
     gap: 14px;
     padding: 44px 0;
+  }
+}
+
+/* Fingers need bigger targets than a mouse does. The look doesn't change. */
+@media (pointer: coarse) {
+  .email-action button,
+  .form-toggle-btn {
+    min-height: 44px;
+  }
+
+  .footer-links {
+    gap: 6px 22px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    margin-top: 0;
+    padding: 14px 0 8px;
   }
 }

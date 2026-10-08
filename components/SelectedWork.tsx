@@ -52,13 +52,17 @@ const ProjectCard: React.FC<{ project: Project; idx: number }> = ({ project, idx
       className={`project ${idx === 0 ? "featured" : ""} ${reveal.className}`}
       style={reveal.style}
     >
-      <div className="project-number">
-        <span className="project-mark" aria-hidden="true">
-          {marks[project.id]}
-        </span>
-        <span>{project.number}</span>
+      <div className="project-rail">
+        <div className="project-number">
+          <span className="project-mark" aria-hidden="true">
+            {marks[project.id]}
+          </span>
+          <span>{project.number}</span>
+        </div>
+        <p className="project-kind">{project.kind}</p>
+        <p className="project-status">{project.status}</p>
       </div>
-      <p className="project-kind">{project.kind}</p>
+
       <div className="project-copy">
         {idx === 0 && <span className="featured-label">Featured</span>}
         <h3>
@@ -71,52 +75,55 @@ const ProjectCard: React.FC<{ project: Project; idx: number }> = ({ project, idx
         </h3>
         <p>{project.description}</p>
         {project.note && <p className="project-note">{project.note}</p>}
-        {project.image && project.link && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            className="project-shot"
-            tabIndex={-1}
-          >
-            <Image
-              src={project.image}
-              alt={project.imageAlt ?? ""}
-              width={1280}
-              height={800}
-              sizes="(max-width: 900px) 90vw, 440px"
-            />
-          </a>
-        )}
-      </div>
-      <div className="project-side">
-        <b>{project.status}</b>
-        <div className="tags">
-          {project.tags.map((tag) => (
-            <span key={tag} className="tag-badge">
-              {tag}
-            </span>
-          ))}
+
+        <div className="project-actions">
+          <div className="tags">
+            {project.tags.map((tag) => (
+              <span key={tag} className="tag-badge">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="project-links">
+            {project.link ? (
+              <a href={project.link} target="_blank" rel="noreferrer" className="project-link">
+                <span>{project.linkText}</span>
+                <span className="project-link-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            ) : (
+              project.linkText && <p className="project-note">{project.linkText}</p>
+            )}
+            {project.caseStudy && (
+              <Link href={project.caseStudy} className="project-link">
+                <span>Read the case study</span>
+                <span className="project-link-arrow" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            )}
+          </div>
         </div>
-        {project.link ? (
-          <a href={project.link} target="_blank" rel="noreferrer" className="project-link">
-            <span>{project.linkText}</span>
-            <span className="project-link-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </a>
-        ) : (
-          project.linkText && <p className="project-note">{project.linkText}</p>
-        )}
-        {project.caseStudy && (
-          <Link href={project.caseStudy} className="project-link">
-            <span>Read the case study</span>
-            <span className="project-link-arrow" aria-hidden="true">
-              →
-            </span>
-          </Link>
-        )}
       </div>
+
+      {project.image && project.link && (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noreferrer"
+          className="project-shot"
+          tabIndex={-1}
+        >
+          <Image
+            src={project.image}
+            alt={project.imageAlt ?? ""}
+            width={1280}
+            height={800}
+            sizes="(max-width: 900px) 90vw, 440px"
+          />
+        </a>
+      )}
     </article>
   );
 };
