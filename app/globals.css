@@ -1329,7 +1329,7 @@ footer h2 a:hover {
   }
 }
 
-/* Custom Cursor — a pen-nib pointer with a trailing ink stroke, standing in for the system arrow */
+/* Custom Cursor — a pencil pointer with a short graphite trail, standing in for the system arrow */
 /* The system arrow is hidden only while CustomCursor is actually tracking the mouse
    (it adds .has-custom-cursor on the first mousemove), so a narrow window, a touch
    device or a failed script can never end up with no cursor at all. */
@@ -1343,15 +1343,18 @@ html.has-custom-cursor textarea {
   cursor: text !important;
 }
 
-.cursor-dot,
-.cursor-ring {
+/* The pencil: the tip sits exactly on the pointer, with no lag, standing in for the arrow.
+   Each piece is a zero-size point at the pointer, so the drawing is placed around it. */
+.cursor-pencil,
+.cursor-trail {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
+  width: 0;
+  height: 0;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, -50%);
   transition: opacity 0.2s;
 }
 
@@ -1359,48 +1362,70 @@ html.has-custom-cursor textarea {
   opacity: 1;
 }
 
-/* The nib — sits exactly on the pointer, no lag, standing in for the arrow */
-.cursor-dot {
-  width: 13px;
-  height: 13px;
+.cursor-pencil-art {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  transform-origin: 0 0;
+  transition: transform 0.12s ease;
 }
 
-.cursor-dot::before {
+.cp-wood { fill: #e6c595; }
+.cp-lead { fill: #4a4238; transition: fill 0.2s ease; }
+.cp-body { fill: #f2c64d; }
+.cp-shade { fill: #d9a91c; }
+.cp-ferrule { fill: #b9a780; }
+.cp-line { stroke: #8f805c; stroke-width: 0.6; }
+.cp-eraser { fill: #d98068; }
+
+/* Over a link or a project card the tip turns red, like picking up a red pencil */
+.cursor-active .cp-lead {
+  fill: var(--accent);
+}
+
+/* A press: the pencil dips a pixel and leaves a small dot */
+.cursor-pressed .cursor-pencil-art {
+  transform: translate(1px, 1px);
+}
+
+.cursor-mark {
+  position: absolute;
+  top: -3.5px;
+  left: -3.5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4a4238;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.2s ease;
+}
+
+.cursor-pressed .cursor-mark {
+  opacity: 0.9;
+  transform: scale(1);
+}
+
+.cursor-active .cursor-mark {
+  background: var(--accent);
+}
+
+/* The graphite trail: three dots that catch up to the tip one after another */
+.cursor-trail::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: var(--ink);
-  clip-path: polygon(50% 0%, 100% 62%, 52% 100%, 0% 46%);
-  transform: rotate(-38deg);
+  border-radius: 50%;
+  background: #4a4238;
   transition: background-color 0.2s ease;
 }
 
-/* The stroke — trails with a slight lag, like ink dragging behind the nib */
-.cursor-ring {
-  width: 22px;
-  height: 4px;
-}
+.cursor-trail-1::before { top: -1.5px; left: -1.5px; width: 3px; height: 3px; opacity: 0.5; }
+.cursor-trail-2::before { top: -1.2px; left: -1.2px; width: 2.4px; height: 2.4px; opacity: 0.35; }
+.cursor-trail-3::before { top: -0.9px; left: -0.9px; width: 1.8px; height: 1.8px; opacity: 0.2; }
 
-.cursor-ring::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--ink);
-  border-radius: 3px;
-  opacity: 0.5;
-  transform: rotate(-6deg);
-  transition: opacity 0.25s ease, background-color 0.25s ease, transform 0.3s ease;
-}
-
-.cursor-active {
-  width: 58px !important;
-  height: 5px !important;
-}
-
-.cursor-active::before {
-  background: var(--accent) !important;
-  opacity: 0.9 !important;
-  transform: rotate(-2deg) !important;
+.cursor-trail.cursor-active::before {
+  background: var(--accent);
 }
 
 /* Scroll Reveal */
@@ -1456,8 +1481,8 @@ html.has-custom-cursor textarea {
   .status-dot {
     animation: none !important;
   }
-  .cursor-dot,
-  .cursor-ring {
+  .cursor-pencil,
+  .cursor-trail {
     display: none !important;
   }
 
