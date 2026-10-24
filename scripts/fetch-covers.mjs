@@ -15,11 +15,11 @@ const srcDir = path.join(root, "scripts", "covers-src");
 // the page in a browser; it's used when the page can't be read here (Behance serves scripts a
 // bot challenge). Years for lib/data.ts come from the "Published:" line on each page.
 const items = [
-  { id: "campus-work", url: "https://www.behance.net/gallery/257518891/Campus-Design-Work-IEEE-and-T-P-Cell-JNEC", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/hd/ccf8b2257518891.6adb8bb81e897.jpg" },
-  { id: "esummit", url: "https://www.behance.net/gallery/252873023/E-Summit-JNEC-Social-Media-Graphic-Design-Showcase", cover: "https://mir-s3-cdn-cf.behance.net/projects/max_808/fd5efd252873023.Y3JvcCwzMzc1LDI2MzksMCw5Mjc.jpg" },
-  { id: "valorant", url: "https://www.behance.net/gallery/119930005/Valorant-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/5d1fd9119930005.60a781bd2f895.jpg" },
-  { id: "fortnite", url: "https://www.behance.net/gallery/110221073/Fortnite-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/e5f0de110221073.607d8c513c576.png" },
-  { id: "irl", url: "https://www.behance.net/gallery/112701177/IRL-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/093324112701177.60197dce9679b.jpg" },
+  { id: "campus-work", url: "https://www.behance.net/gallery/257518891/Campus-Design-Work-IEEE-and-T-P-Cell-JNEC", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/ccf8b2257518891.6adb8bb81e897.jpg" },
+  { id: "esummit", url: "https://www.behance.net/gallery/252873023/E-Summit-JNEC-Social-Media-Graphic-Design-Showcase", cover: "https://mir-s3-cdn-cf.behance.net/projects/original/fd5efd252873023.Y3JvcCwzMzc1LDI2MzksMCw5Mjc.jpg" },
+  { id: "valorant", url: "https://www.behance.net/gallery/119930005/Valorant-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/5d1fd9119930005.60a781bd2f895.jpg" },
+  { id: "fortnite", url: "https://www.behance.net/gallery/110221073/Fortnite-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/e5f0de110221073.607d8c513c576.png" },
+  { id: "irl", url: "https://www.behance.net/gallery/112701177/IRL-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/093324112701177.60197dce9679b.jpg" },
 ];
 
 const exists = (p) => access(p).then(() => true, () => false);
@@ -80,8 +80,8 @@ for (const { id, url, cover } of items) {
     let year = null;
     if (!buf) ({ buf, year } = await fetchCover(url, cover));
     await sharp(buf)
-      .resize({ width: 1400, height: 1400, fit: "inside", withoutEnlargement: true })
-      .webp({ quality: 80 })
+      .resize({ width: 2000, height: 2000, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 90 })
       .toFile(out);
     console.log(`ok    ${id}`);
     if (year) years.push(`${id}: ${year}`);

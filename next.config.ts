@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   outputFileTracingRoot: path.join(__dirname),
+  images: {
+    qualities: [75, 90],
+  },
 };
 
 export default nextConfig;

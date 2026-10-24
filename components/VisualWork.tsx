@@ -25,7 +25,14 @@ const GfxTile: React.FC<{ work: VisualWorkItem; idx: number }> = ({ work, idx })
           src={work.image}
           alt={`${work.title} cover`}
           fill
-          sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw"
+          // Tiles are 4:5 but most covers are 16:9, so object-fit: cover renders them
+          // ~2.25x wider than the tile. Size for that, or they get upscaled and blur.
+          sizes={
+            work.featured
+              ? "(max-width:560px) 100vw, 66vw"
+              : "(max-width:560px) 225vw, (max-width:900px) 113vw, 75vw"
+          }
+          quality={90}
           className="gfx-img"
         />
         <div className="gfx-overlay" aria-hidden="true">
