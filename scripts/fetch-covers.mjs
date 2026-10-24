@@ -19,7 +19,7 @@ const items = [
   { id: "esummit", url: "https://www.behance.net/gallery/252873023/E-Summit-JNEC-Social-Media-Graphic-Design-Showcase", cover: "https://mir-s3-cdn-cf.behance.net/projects/original/fd5efd252873023.Y3JvcCwzMzc1LDI2MzksMCw5Mjc.jpg" },
   { id: "valorant", url: "https://www.behance.net/gallery/119930005/Valorant-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/5d1fd9119930005.60a781bd2f895.jpg" },
   { id: "fortnite", url: "https://www.behance.net/gallery/110221073/Fortnite-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/e5f0de110221073.607d8c513c576.png" },
-  { id: "irl", url: "https://www.behance.net/gallery/112701177/IRL-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/093324112701177.60197dce9679b.jpg" },
+  { id: "irl", url: "https://www.behance.net/gallery/112701177/IRL-Thumbnails", cover: "https://mir-s3-cdn-cf.behance.net/project_modules/source/d3c48d112701177.60197dce96ed3.png" },
 ];
 
 const exists = (p) => access(p).then(() => true, () => false);
