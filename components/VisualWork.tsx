@@ -6,42 +6,36 @@ import { visualWorks } from "@/lib/data";
 import { useReveal } from "@/lib/useReveal";
 import type { VisualWorkItem } from "@/types";
 
-const GfxCard: React.FC<{ work: VisualWorkItem; idx: number }> = ({ work, idx }) => {
+const GfxTile: React.FC<{ work: VisualWorkItem; idx: number }> = ({ work, idx }) => {
   const reveal = useReveal<HTMLAnchorElement>(idx * 90);
-  const flatTitle = work.title.replace(/\n/g, " ");
+  const label = [work.title, work.year, "opens on Behance"].filter(Boolean).join(", ");
 
   return (
     <a
       ref={reveal.ref}
-      className={`gfx-display ${reveal.className}`}
+      className={`gfx-tile${work.featured ? " is-featured" : ""} ${reveal.className}`}
       style={reveal.style}
       href={work.url}
       target="_blank"
       rel="noreferrer"
+      aria-label={label}
     >
-      {work.thumbnail && (
-        <div className="gfx-thumb">
-          <Image
-            src={work.thumbnail}
-            alt={`Cover image for the ${flatTitle} project on Behance`}
-            fill
-            sizes="(max-width: 900px) 100vw, 33vw"
-            className="gfx-thumb-img"
-          />
+      <div className="gfx-media">
+        <Image
+          src={work.image}
+          alt={`${work.title} cover`}
+          fill
+          sizes="(max-width:560px) 100vw, (max-width:900px) 50vw, 33vw"
+          className="gfx-img"
+        />
+        <div className="gfx-overlay" aria-hidden="true">
+          <span className="gfx-overlay-title">{work.title}</span>
+          {work.year && <span className="gfx-overlay-year">{work.year}</span>}
         </div>
-      )}
-      <div className="gfx-body">
-        <p className="eyebrow">{work.eyebrow}</p>
-        <h3>
-          {work.title.split("\n").map((line, i) => (
-            <React.Fragment key={i}>
-              {line}
-              {i < work.title.split("\n").length - 1 && <br />}
-            </React.Fragment>
-          ))}
-        </h3>
-        <p>{work.description}</p>
-        <span className="gfx-cta">{work.ctaText}</span>
+      </div>
+      <div className="gfx-caption" aria-hidden="true">
+        <span>{work.title}</span>
+        {work.year && <span>{work.year}</span>}
       </div>
     </a>
   );
@@ -60,9 +54,9 @@ export const VisualWork: React.FC = () => {
           graphic design.
         </h2>
       </div>
-      <div className="gfx-layout">
+      <div className="gfx-gallery">
         {visualWorks.map((work, idx) => (
-          <GfxCard key={work.id} work={work} idx={idx} />
+          <GfxTile key={work.id} work={work} idx={idx} />
         ))}
       </div>
     </section>

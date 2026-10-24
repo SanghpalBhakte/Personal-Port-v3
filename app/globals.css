@@ -846,102 +846,132 @@ nav a::before,
   padding-bottom: var(--space-section);
 }
 
-.gfx-layout {
+.gfx-gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 14px;
+  background: var(--ink);
+  color: var(--ink-text);
 }
 
-.gfx-display {
-  min-height: 220px;
-  background: var(--card-surface);
-  border: 1px solid rgba(43, 32, 19, 0.14);
+.gfx-tile {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: inherit;
   text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(43, 32, 19, 0.06);
-  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.gfx-layout > a:nth-child(3n+1) {
-  transform: rotate(-1.4deg);
+.gfx-tile:focus-visible {
+  outline-color: var(--accent-on-dark);
 }
 
-.gfx-layout > a:nth-child(3n+2) {
-  transform: rotate(1deg);
-}
-
-.gfx-layout > a:nth-child(3n+3) {
-  transform: rotate(-0.9deg);
-}
-
-.gfx-display:hover {
-  background-color: #fdfaef;
-  border-color: var(--ink);
-  transform: rotate(0deg) translateY(-3px);
-  box-shadow: 0 10px 26px rgba(43, 32, 19, 0.12);
-}
-
-.gfx-thumb {
+.gfx-media {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: var(--rule);
+  flex: 1 1 auto;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
+  background: var(--ink-input-bg);
 }
 
-.gfx-thumb-img {
+.gfx-tile.is-featured {
+  grid-column: span 2;
+}
+
+.gfx-tile.is-featured .gfx-media {
+  aspect-ratio: 8 / 5;
+}
+
+.gfx-img {
   object-fit: cover;
-  filter: grayscale(20%);
-  transition: filter 0.35s ease, transform 0.5s ease;
 }
 
-.gfx-display:hover .gfx-thumb-img {
-  filter: grayscale(0%);
-  transform: scale(1.035);
+.gfx-overlay {
+  display: none;
 }
 
-.gfx-body {
-  padding: 22px 24px 24px;
+.gfx-caption {
   display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.gfx-display h3 {
-  margin: 14px 0 9px;
-  font-size: clamp(26px, 2.2vw, 31px);
-  letter-spacing: -0.045em;
-  font-weight: 500;
-  line-height: 1.2;
-  transition: color 0.2s ease;
-}
-
-.gfx-display:hover h3 {
-  color: #000;
-}
-
-.gfx-display p:not(.eyebrow) {
-  max-width: 430px;
-  margin: 0;
-  color: var(--body-text);
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.gfx-cta {
-  display: block;
-  margin-top: auto;
-  padding-top: 24px;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
   font: 12px var(--font-mono), "DM Mono", monospace;
-  color: var(--accent);
-  letter-spacing: 0.04em;
-  transition: transform 0.2s ease;
+  color: var(--ink-text);
 }
 
-.gfx-display:hover .gfx-cta {
-  transform: translateX(3px);
+@media (hover: hover) and (pointer: fine) {
+  .gfx-caption {
+    display: none;
+  }
+
+  .gfx-img {
+    transition: transform 250ms ease;
+  }
+
+  .gfx-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background: rgba(251, 246, 232, 0.88);
+    color: var(--ink);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 250ms ease;
+  }
+
+  .gfx-overlay-title {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .gfx-overlay-year {
+    font: 12px var(--font-mono), "DM Mono", monospace;
+  }
+
+  .gfx-tile:hover .gfx-overlay,
+  .gfx-tile:focus-visible .gfx-overlay {
+    opacity: 1;
+  }
+
+  .gfx-tile:hover .gfx-img,
+  .gfx-tile:focus-visible .gfx-img {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gfx-tile:hover .gfx-img,
+  .gfx-tile:focus-visible .gfx-img {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .gfx-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .gfx-gallery {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gfx-tile.is-featured {
+    grid-column: auto;
+  }
+
+  .gfx-tile.is-featured .gfx-media {
+    aspect-ratio: 4 / 5;
+  }
 }
 
 /* Toolbox */
@@ -1666,8 +1696,7 @@ html.has-custom-cursor textarea {
   }
 
   .notes-grid,
-  .notes-list,
-  .gfx-layout {
+  .notes-list {
     grid-template-columns: 1fr;
     gap: 24px;
   }

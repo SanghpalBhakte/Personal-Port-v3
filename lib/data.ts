@@ -105,40 +105,44 @@ export const notes: NoteItem[] = [
   },
 ];
 
-// Each thumbnail URL below was verified with a direct HTTP request (HTTP 200 + image
-// content-type) before being added, never guessed. To add another piece from Behance,
-// verify its cover image the same way and paste the confirmed URL; leave thumbnail: ""
-// (VisualWork.tsx falls back to a plain card) if you can't verify one yet.
+// Covers live in /public/design and come from `npm run covers` (scripts/fetch-covers.mjs).
+// Years are the "Published" date on each Behance gallery.
 export const visualWorks: VisualWorkItem[] = [
   {
+    id: "campus-work",
+    title: "Campus Design Work",
+    url: "https://www.behance.net/gallery/257518891/Campus-Design-Work-IEEE-and-T-P-Cell-JNEC",
+    image: "/design/campus-work.webp",
+    year: "2026",
+    featured: true,
+  },
+  {
     id: "esummit",
-    category: "graphics",
-    eyebrow: "E-Summit / social media",
-    title: "E-Summit\ngraphics",
-    description: "Social media posts and event graphics I made for E-Summit.",
-    url: "https://www.behance.net/gallery/252873023/E-Summit-Social-Media-Graphic-Design-Showcase",
-    ctaText: "VIEW ON BEHANCE ↗",
-    thumbnail: "https://mir-s3-cdn-cf.behance.net/projects/404/fd5efd252873023.Y3JvcCwzMzc1LDI2MzksMCw5Mjc.jpg",
+    title: "E-Summit JNEC",
+    url: "https://www.behance.net/gallery/252873023/E-Summit-JNEC-Social-Media-Graphic-Design-Showcase",
+    image: "/design/esummit.webp",
+    year: "2026",
+  },
+  {
+    id: "valorant",
+    title: "Valorant Thumbnails",
+    url: "https://www.behance.net/gallery/119930005/Valorant-Thumbnails",
+    image: "/design/valorant.webp",
+    year: "2021",
   },
   {
     id: "fortnite",
-    category: "thumbnails",
-    eyebrow: "Freelance / thumbnails",
-    title: "Fortnite\nthumbnails",
-    description: "Thumbnails I made for Fortnite videos as freelance work.",
+    title: "Fortnite Thumbnails",
     url: "https://www.behance.net/gallery/110221073/Fortnite-Thumbnails",
-    ctaText: "VIEW ON BEHANCE ↗",
-    thumbnail: "https://mir-s3-cdn-cf.behance.net/projects/404/20a210110221073.Y3JvcCwxMDA3LDc4OCwzODksMA.png",
+    image: "/design/fortnite.webp",
+    year: "2020",
   },
   {
-    id: "irl-thumbnails",
-    category: "thumbnails-study",
-    eyebrow: "Thumbnail study",
-    title: "IRL\nthumbnails",
-    description: "Thumbnails I designed for IRL videos.",
+    id: "irl",
+    title: "IRL Thumbnails",
     url: "https://www.behance.net/gallery/112701177/IRL-Thumbnails",
-    ctaText: "VIEW ON BEHANCE ↗",
-    thumbnail: "https://mir-s3-cdn-cf.behance.net/projects/404/c7ec01112701177.Y3JvcCw1MzEsNDE1LDQ1NSwxNQ.png",
+    image: "/design/irl.webp",
+    year: "2021",
   },
 ];
 

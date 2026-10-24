@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 // Hovering these turns the pencil tip red, like picking up a red pencil.
-const INTERACTIVE = "a, button, .project, .gfx-display, [role='button']";
+const INTERACTIVE = "a, button, .project, .gfx-tile, [role='button']";
 // Over text fields the real text caret is shown instead of the pencil.
 const TEXT_FIELD = "input, textarea, [contenteditable='true']";
 // How fast each graphite dot catches up to the pencil tip. Smaller means more lag.

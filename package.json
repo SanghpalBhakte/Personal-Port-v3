@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "covers": "node scripts/fetch-covers.mjs"
   },
   "dependencies": {
     "@upstash/ratelimit": "^2.0.5",
@@ -24,6 +25,7 @@
     "@types/react-dom": "^19.0.8",
     "eslint": "^9.20.0",
     "eslint-config-next": "^15.2.0",
+    "sharp": "^0.35.5",
     "typescript": "^5.7.3"
   }
 }
