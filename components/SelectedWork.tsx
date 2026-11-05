@@ -27,14 +27,6 @@ const marks: Record<string, React.ReactNode> = {
       <path d="M7.8 12h8.4" />
     </svg>
   ),
-  rivet: (
-    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-      <circle cx="5" cy="12" r="1.5" stroke="none" />
-      <circle cx="12" cy="12" r="1.5" stroke="none" />
-      <circle cx="19" cy="12" r="1.5" stroke="none" />
-      <path d="M6.6 12h3.6M13.8 12h3.6" fill="none" />
-    </svg>
-  ),
   "janai-tours": (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3.5 16.5c4-1.7 4-9.7 8-9.7s3.3 7.7 8 6.2" strokeDasharray="0.5 3.3" />
@@ -94,6 +86,14 @@ const ProjectCard: React.FC<{ project: Project; idx: number }> = ({ project, idx
               </a>
             ) : (
               project.linkText && <p className="project-note">{project.linkText}</p>
+            )}
+            {project.repo && (
+              <a href={project.repo} target="_blank" rel="noreferrer" className="project-link">
+                <span>View on GitHub</span>
+                <span className="project-link-arrow" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
             )}
             {project.caseStudy && (
               <Link href={project.caseStudy} className="project-link">

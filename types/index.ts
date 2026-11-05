@@ -9,6 +9,8 @@ export interface Project {
   tags: string[];
   link?: string;
   linkText?: string;
+  /** GitHub repo, shown as a second link. */
+  repo?: string;
   /** Screenshot in /public/projects, captured from the live app. */
   image?: string;
   imageAlt?: string;

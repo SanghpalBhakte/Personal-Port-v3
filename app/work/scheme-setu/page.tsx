@@ -57,6 +57,12 @@ const features = [
   "Save schemes, use the EMI calculator and see partner organisations",
 ];
 
+const improvements = [
+  "Cover more than 34 schemes. We kept the list small on purpose so each one could be checked by hand against its official source.",
+  "Keep re-checking every scheme, because the rules change.",
+  "Test it with real first-time entrepreneurs, not only demo profiles.",
+];
+
 export default function SchemeSetuCaseStudy() {
   return (
     <>
@@ -76,7 +82,7 @@ export default function SchemeSetuCaseStudy() {
           <dl className="case-facts">
             <div>
               <dt>My role</dt>
-              <dd>Research, product &amp; AI lead</dd>
+              <dd>Research &amp; product lead</dd>
             </div>
             <div>
               <dt>Team</dt>
@@ -126,10 +132,15 @@ export default function SchemeSetuCaseStudy() {
         <section className="case-section section-rule" aria-labelledby="case-role">
           <p className="eyebrow">02 / My role</p>
           <div>
-            <h2 id="case-role">Research, product and AI lead.</h2>
+            <h2 id="case-role">Research and product lead.</h2>
             <p>
-              We were a team of six. I led research, product and the AI side, which meant working out who
-              we were building for, what the app should do and how the matching should work.
+              We were a team of six. I led research and product: working out who we were building for,
+              what the app should do and how it should work. The idea and the product design were mine.
+            </p>
+            <p>
+              The matching itself is rule-based, so every score can be explained. Around it, the team also
+              built an AI pipeline and an Assistant chat to help users. AI tools wrote most of the code,
+              so I don&rsquo;t claim the code as mine.
             </p>
           </div>
         </section>
@@ -161,6 +172,29 @@ export default function SchemeSetuCaseStudy() {
               This is a hackathon prototype, not an official government site. The app always asks people
               to confirm details on the scheme&rsquo;s official page before applying.
             </p>
+          </div>
+        </section>
+
+        <section className="case-section section-rule" aria-labelledby="case-tools">
+          <p className="eyebrow">05 / Tools I used</p>
+          <div>
+            <h2 id="case-tools">What it was made with.</h2>
+            <p>
+              It is a Next.js web app hosted on Vercel, and it can be installed like an app. AI tools wrote
+              most of the code.
+            </p>
+          </div>
+        </section>
+
+        <section className="case-section section-rule" aria-labelledby="case-improve">
+          <p className="eyebrow">06 / What I would improve</p>
+          <div>
+            <h2 id="case-improve">What I would do next.</h2>
+            <ul className="case-list">
+              {improvements.map((i) => (
+                <li key={i}>{i}</li>
+              ))}
+            </ul>
           </div>
         </section>
 

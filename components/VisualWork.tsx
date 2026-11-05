@@ -54,7 +54,7 @@ export const VisualWork: React.FC = () => {
       <div className="section-heading">
         <div className="section-meta">
           <p className="eyebrow">03 / Visual work</p>
-          <span className="section-subtext">Some of my graphic design</span>
+          <span className="section-subtext">GFX Head, IEEE Student Branch, JNEC</span>
         </div>
         <h2 id="gfx-title">
           I also do<br />

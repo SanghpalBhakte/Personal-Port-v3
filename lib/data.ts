@@ -27,23 +27,25 @@ export const projects: Project[] = [
   {
     id: "clarity-desk",
     number: "01",
-    kind: "Student productivity PWA",
+    kind: "Personal project / Student PWA",
     title: "Clarity\nDesk",
-    description: "One place for a college week: timetable, attendance, tasks, and resources. Made for Indian students who are tired of jumping between apps.",
+    description: "One place for a college week: timetable, tasks, deadlines and attendance. Attendance is built for my university only. Made for Indian students who are tired of jumping between apps.",
     note: "Previously called Campus OS.",
     status: "IN DEVELOPMENT /\nACTIVE TESTING",
     tags: ["Vanilla JavaScript", "Firebase", "PWA"],
-    link: "https://campusos-83365.web.app/#dashboard",
+    link: "https://claritydesk.web.app",
     linkText: "View live",
+    repo: "https://github.com/SanghpalBhakte/Clarity-Desk",
     image: "/projects/clarity-desk.webp",
     imageAlt: "Clarity Desk’s Today page showing timetable, tasks and attendance",
+    caseStudy: "/work/clarity-desk",
   },
   {
     id: "scheme-matching",
     number: "02",
-    kind: "Scheme matching app",
+    kind: "College hackathon project",
     title: "Scheme\nSetu",
-    description: "A web app that helps first-time and marginalised entrepreneurs find government schemes they qualify for, and shows why each one matches. I led research, product and the matching approach.",
+    description: "A web app that helps first-time and marginalised entrepreneurs find government schemes they qualify for, and shows why each one matches. I led research and product. AI tools wrote most of the code.",
     status: "SMART INDIA HACKATHON /\nTEAM OF 6",
     tags: ["Research", "Product lead", "Rule-based matching"],
     link: "https://sih-ai-scheme-matcher-v2.vercel.app/",
@@ -55,7 +57,7 @@ export const projects: Project[] = [
   {
     id: "sweep",
     number: "03",
-    kind: "Subscription tracker",
+    kind: "Personal project / Subscription tracker",
     title: "Sweep",
     description: "A simple way to keep track of subscriptions and regular payments in one place. I’m keeping it calm and easy to read.",
     status: "IN DEVELOPMENT /\nACTIVE REDESIGN",
@@ -66,24 +68,17 @@ export const projects: Project[] = [
     imageAlt: "Sweep’s overview screen",
   },
   {
-    id: "rivet",
-    number: "04",
-    kind: "Tool for a service team",
-    title: "Rivet",
-    description: "A small tool that helps a service team keep track of follow-ups and the status of each job.",
-    status: "IN DEVELOPMENT /\nPROTOTYPE",
-    tags: ["Internal tool", "Work tracking"],
-    linkText: "Work in progress",
-  },
-  {
     id: "janai-tours",
-    number: "05",
-    kind: "Travel agency website",
+    number: "04",
+    kind: "Family business work / Website",
     title: "Janai Tours\n& Travels",
-    description: "A website for a travel agency, plus a few ideas to make their enquiries and trip planning easier. Still in progress.",
-    status: "IN\nDEVELOPMENT",
-    tags: ["Website", "Workflows"],
-    linkText: "Private prototype",
+    description: "A website for my family’s travel agency, made on Wix with help from AI tools. I also set up the Google Maps listing, basic SEO and online booking. The site is in English and Marathi. It is small work for family, not a client project.",
+    status: "LIVE",
+    tags: ["Wix", "SEO", "Google Maps"],
+    link: "https://www.janaitoursandtravels.com/",
+    linkText: "View live",
+    image: "/projects/janai-tours.webp",
+    imageAlt: "Janai Tours & Travels home page, in English and Marathi",
   },
 ];
 
@@ -102,6 +97,11 @@ export const notes: NoteItem[] = [
     number: "03",
     title: "Learn by doing",
     description: "I build something, use it, notice what feels off and fix it. Then I do that again.",
+  },
+  {
+    number: "04",
+    title: "Use AI, stay in charge",
+    description: "The ideas, product decisions and testing are mine. I use a mix of AI tools to speed up the coding, then I check the result and fix what is wrong.",
   },
 ];
 
@@ -148,16 +148,16 @@ export const visualWorks: VisualWorkItem[] = [
 
 export const toolGroups: ToolGroup[] = [
   {
-    category: "Build",
-    items: "JavaScript · TypeScript · React · Next.js · HTML · CSS · Tailwind CSS",
+    category: "Development and technology",
+    items: "HTML · CSS · JavaScript · Firebase · Next.js · Vercel · GitHub · Wix",
   },
   {
-    category: "Data & deploy",
-    items: "Firebase · Firestore · Supabase · Vercel · Netlify · Cloudflare Pages",
+    category: "Product and project work",
+    items: "Product research · Scoping versions · Testing · AI coding tools · Notion",
   },
   {
-    category: "Tools & AI",
-    items: "GitHub · Notion · Claude · Gemini · Groq · Perplexity · Wix Studio",
+    category: "Design",
+    items: "Photoshop · Canva",
   },
 ];
 
